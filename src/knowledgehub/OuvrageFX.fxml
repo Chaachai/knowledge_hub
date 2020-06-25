@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="1087.0" style="-fx-background-color: #2F2B43;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="knowledgehub.OuvrageController">
+   <children>
+      <AnchorPane prefHeight="519.0" prefWidth="262.0" style="-fx-background-color: #393351;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox layoutY="160.0" prefHeight="356.0" prefWidth="262.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="160.0" />
+            <Pane layoutY="86.0" prefHeight="61.0" prefWidth="262.0" style="-fx-background-color: #904aef; -fx-background-radius: 5;">
+               <children>
+                  <Label fx:id="full_name" layoutX="67.0" layoutY="17.0" text="Youssef Chaachai" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="47.0" fitWidth="44.0" layoutX="13.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/avatar.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+         </children></AnchorPane>
+      <Pane layoutX="261.0" layoutY="2.0" prefHeight="649.0" prefWidth="631.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="261.0" AnchorPane.rightAnchor="-3.0" AnchorPane.topAnchor="2.0">
+         <children>
+            <Label id="close" fx:id="close" layoutX="798.0" layoutY="10.0" onMouseClicked="#closeApp" text="X" textFill="WHITE">
+               <font>
+                  <Font name="Berlin Sans FB" size="23.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <Label layoutX="758.0" text="-" textFill="WHITE">
+               <font>
+                  <Font name="Berlin Sans FB" size="42.0" />
+               </font>
+            </Label>
+            <Button fx:id="minimize" layoutX="751.0" layoutY="11.0" mnemonicParsing="false" onAction="#minimizeApp" opacity="0.01" prefHeight="3.0" prefWidth="28.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <TableView fx:id="ouvragesTable" layoutX="17.0" layoutY="95.0" onMouseClicked="#mouseClickedTable" prefHeight="224.0" prefWidth="789.0" stylesheets="@../css/table_view_style.css">
+              <columns>
+                <TableColumn fx:id="ouvrage_titre" prefWidth="216.0" text="TITLE" />
+                  <TableColumn fx:id="ouvrage_editeur" prefWidth="127.0" text="PUBLISHER" />
+                  <TableColumn fx:id="ouvrage_annee" prefWidth="54.0" text="YEAR" />
+                  <TableColumn fx:id="ouvrage_stock" prefWidth="48.0" text="STOCK" />
+                  <TableColumn fx:id="ouvrage_auteur" prefWidth="158.33331298828125" text="AUTHOR" />
+                  <TableColumn fx:id="ouvrage_domaine" prefWidth="116.66668701171875" text="FIELD" />
+                  <TableColumn fx:id="ouvrage_ruptures" prefWidth="66.33331298828125" text="SOLD OUT" />
+              </columns>
+            </TableView>
+            <TextField fx:id="search" layoutX="19.0" layoutY="37.0" onKeyReleased="#filterBooks" prefHeight="47.0" prefWidth="403.0" promptText="Search" style="-fx-background-color: #2F2B43; -fx-border-color: #b178ff; -fx-background-radius: 3; -fx-border-radius: 3;" styleClass="my-field" stylesheets="@../css/fullpackstyling.css">
+               <padding>
+                  <Insets left="33.0" />
+               </padding>
+            </TextField>
+            <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="29.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/search_icon.png" />
+               </image>
+            </ImageView>
+            <Pane layoutX="14.0" layoutY="335.0" prefHeight="299.0" prefWidth="449.0" style="-fx-border-color: #b178ff; -fx-border-radius: 5; -fx-background-radius: 5;">
+               <children>
+                  <Button defaultButton="true" layoutX="234.0" layoutY="247.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="187.0" style="-fx-background-radius: 5; -fx-background-color: #14c77d; -fx-border-radius: 5;" text="ADD" textFill="WHITE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/add_icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <TextField fx:id="bookTitle" layoutX="30.0" layoutY="69.0" prefHeight="33.0" prefWidth="187.0" promptText="Title" style="-fx-background-color: #2F2B43; -fx-border-color: #b178ff; -fx-background-radius: 3; -fx-border-radius: 3;" styleClass="my-field" stylesheets="@../css/fullpackstyling.css" />
+                  <TextField fx:id="bookPublisher" layoutX="30.0" layoutY="129.0" prefHeight="33.0" prefWidth="187.0" promptText="Publisher" style="-fx-background-color: #2F2B43; -fx-border-color: #b178ff; -fx-background-radius: 3; -fx-border-radius: 3;" styleClass="my-field" stylesheets="@../css/fullpackstyling.css" />
+                  <TextField fx:id="year" layoutX="30.0" layoutY="187.0" prefHeight="33.0" prefWidth="187.0" promptText="Year" style="-fx-background-color: #2F2B43; -fx-border-color: #b178ff; -fx-background-radius: 3; -fx-border-radius: 3;" styleClass="my-field" stylesheets="@../css/fullpackstyling.css" />
+                  <TextField fx:id="stock" layoutX="31.0" layoutY="247.0" prefHeight="33.0" prefWidth="89.0" promptText="Stock" style="-fx-background-color: #2F2B43; -fx-border-color: #b178ff; -fx-background-radius: 3; -fx-border-radius: 3;" styleClass="my-field" stylesheets="@../css/fullpackstyling.css" />
+                  <TextField fx:id="soldOut" layoutX="128.0" layoutY="247.0" prefHeight="33.0" prefWidth="89.0" promptText="Sold out" style="-fx-background-color: #2F2B43; -fx-border-color: #b178ff; -fx-background-radius: 3; -fx-border-radius: 3;" styleClass="my-field" stylesheets="@../css/fullpackstyling.css" />
+                  <ComboBox fx:id="auteursCombo" layoutX="232.0" layoutY="69.0" prefHeight="33.0" prefWidth="187.0" promptText="Author" style="-fx-background-color: #2F2B43; -fx-border-color: #b178ff; -fx-border-radius: 3; -fx-background-radius: 3;" styleClass="combo-box-popup" stylesheets="@../css/fullpackstyling.css" />
+                  <ComboBox fx:id="fieldCombo" layoutX="232.0" layoutY="130.0" prefHeight="33.0" prefWidth="187.0" promptText="Field" style="-fx-background-color: #2F2B43; -fx-border-color: #b178ff; -fx-border-radius: 3; -fx-background-radius: 3;" stylesheets="@../css/fullpackstyling.css" />
+                  <Button defaultButton="true" layoutX="233.0" layoutY="187.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="90.0" style="-fx-background-radius: 5; -fx-background-color: #1f8de1; -fx-border-radius: 5;" text="UPDATE" textFill="WHITE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/edit_icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Label layoutX="32.0" layoutY="47.0" text="Title" textFill="#dddddd" />
+                  <Label layoutX="31.0" layoutY="109.0" text="Publisher" textFill="#dddddd" />
+                  <Label layoutX="30.0" layoutY="168.0" text="Year" textFill="#dddddd" />
+                  <Label layoutX="32.0" layoutY="226.0" text="Stock quantity" textFill="#dddddd" />
+                  <Label layoutX="129.0" layoutY="225.0" text="Sold out times" textFill="#dddddd" />
+                  <Label layoutX="233.0" layoutY="48.0" text="Author" textFill="#dddddd" />
+                  <Label layoutX="232.0" layoutY="108.0" text="Field" textFill="#dddddd" />
+                  <Button defaultButton="true" layoutX="329.0" layoutY="187.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="90.0" style="-fx-background-radius: 5; -fx-background-color: #fa2d2d; -fx-border-radius: 5;" text="DELETE" textFill="WHITE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/delete_icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Label layoutX="30.0" layoutY="16.0" text="Add new book" textFill="#dddddd">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="474.0" layoutY="336.0" prefHeight="136.0" prefWidth="337.0" style="-fx-border-color: #b178ff; -fx-border-radius: 5; -fx-background-radius: 5;">
+               <children>
+                  <Button defaultButton="true" layoutX="252.0" layoutY="67.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="76.0" style="-fx-background-radius: 5; -fx-background-color: #14c77d; -fx-border-radius: 5;" text="ADD" textFill="WHITE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/add_icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Button>
+                  <TextField fx:id="firstName" layoutX="10.0" layoutY="67.0" prefHeight="33.0" prefWidth="111.0" promptText="First name" style="-fx-background-color: #2F2B43; -fx-border-color: #b178ff; -fx-background-radius: 3; -fx-border-radius: 3;" styleClass="my-field" stylesheets="@../css/fullpackstyling.css" />
+                  <TextField fx:id="lastName" layoutX="133.0" layoutY="67.0" prefHeight="33.0" prefWidth="111.0" promptText="Last name" style="-fx-background-color: #2F2B43; -fx-border-color: #b178ff; -fx-background-radius: 3; -fx-border-radius: 3;" styleClass="my-field" stylesheets="@../css/fullpackstyling.css" />
+                  <Label layoutX="15.0" layoutY="36.0" text="Add new author" textFill="#dddddd">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="474.0" layoutY="483.0" prefHeight="150.0" prefWidth="337.0" style="-fx-border-color: #b178ff; -fx-border-radius: 5; -fx-background-radius: 5;">
+               <children>
+                  <Button defaultButton="true" layoutX="252.0" layoutY="74.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="76.0" style="-fx-background-radius: 5; -fx-background-color: #14c77d; -fx-border-radius: 5;" text="ADD" textFill="WHITE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <ImageView fitHeight="17.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/add_icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Button>
+                  <TextField fx:id="field" layoutX="10.0" layoutY="74.0" prefHeight="33.0" prefWidth="227.0" promptText="Field" style="-fx-background-color: #2F2B43; -fx-border-color: #b178ff; -fx-background-radius: 3; -fx-border-radius: 3;" styleClass="my-field" stylesheets="@../css/fullpackstyling.css" />
+                  <Label layoutX="15.0" layoutY="43.0" text="Add new Field" textFill="#dddddd">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="202.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="262.0" styleClass="button1" stylesheets="@../css/fullpackstyling.css" text="Lending Books" textFill="WHITE">
+         <graphic>
+            <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/lending_icon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets left="40.0" />
+         </padding>
+      </Button>
+      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="253.0" mnemonicParsing="false" onAction="#toOuvrages" prefHeight="49.0" prefWidth="262.0" styleClass="button1" stylesheets="@../css/fullpackstyling.css" text="Manage Books" textFill="WHITE">
+         <graphic>
+            <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/books_icon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets left="40.0" />
+         </padding>
+      </Button>
+      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="304.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="262.0" styleClass="button1" stylesheets="@../css/fullpackstyling.css" text="Manage Users" textFill="WHITE">
+         <graphic>
+            <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/users_icon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets left="40.0" />
+         </padding>
+      </Button>
+      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="354.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="262.0" styleClass="button1" stylesheets="@../css/fullpackstyling.css" text="Students Info" textFill="WHITE">
+         <graphic>
+            <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/students_icon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets left="40.0" />
+         </padding>
+      </Button>
+      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="405.0" mnemonicParsing="false" onAction="#logout" prefHeight="49.0" prefWidth="262.0" styleClass="button1" stylesheets="@../css/fullpackstyling.css" text="Logout" textFill="WHITE">
+         <graphic>
+            <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/logout_icon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets left="40.0" />
+         </padding>
+      </Button>
+      <ImageView fitHeight="136.0" fitWidth="153.0" layoutX="50.0" layoutY="457.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/KH_logo.png" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="73.0" layoutY="622.0" strokeType="OUTSIDE" strokeWidth="0.0" text="© 2020 Knowledge Hub. " textAlignment="CENTER">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="89.0" layoutY="636.0" strokeType="OUTSIDE" strokeWidth="0.0" text="All rights reserved" textAlignment="CENTER">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Text>
+      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="150.0" mnemonicParsing="false" onAction="#toHome" prefHeight="49.0" prefWidth="262.0" styleClass="button1" stylesheets="@../css/fullpackstyling.css" text="Home" textFill="WHITE">
+         <graphic>
+            <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/home_icon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets left="40.0" />
+         </padding>
+      </Button>
+   </children>
+</AnchorPane>

@@ -5,7 +5,11 @@
  */
 package service;
 
+import beans.Employe;
+import beans.Statut;
+import beans.Universite;
 import java.sql.ResultSet;
+import javax.management.relation.Role;
 
 /**
  *
@@ -14,6 +18,9 @@ import java.sql.ResultSet;
 public class EmployeFacade {
 
     Config c = new Config();
+
+    UniversiteFacade universiteFacade = new UniversiteFacade();
+    StatutFacade statutFacade = new StatutFacade();
 
     public int login(String username, String password, int universite_id) {
         ResultSet rs = c.loadData("SELECT * FROM employes "
@@ -32,6 +39,34 @@ public class EmployeFacade {
             }
         }
         return -2;
+    }
+
+    public Employe getEmployeByLogin(String login) {
+        ResultSet rs = c.loadData("SELECT * FROM employes WHERE username = '" + login + "' ");
+        Employe employe = new Employe();
+        if (rs != null) {
+            try {
+                while (rs.next()) {
+                    employe.setId(rs.getInt(1));
+                    employe.setNom(rs.getString(2));
+                    employe.setPrenom(rs.getString(3));
+                    employe.setAdresse(rs.getString(4));
+                    employe.setUsername(rs.getString(5));
+                    employe.setPassword(rs.getString(6));
+                    Statut statut = statutFacade.findStatutById(rs.getInt(7));
+                    employe.setStatut(statut);
+                    Universite universite = universiteFacade.findUniversiteById(rs.getInt(8));
+                    employe.setUniversite(universite);
+                }
+                return employe;
+            } catch (Exception e) {
+                System.out.println(e);
+                return null;
+            }
+        } else {
+            return null;
+        }
+
     }
 
 }

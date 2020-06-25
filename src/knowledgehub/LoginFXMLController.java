@@ -5,6 +5,7 @@ package knowledgehub;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import beans.Employe;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -62,13 +63,13 @@ public class LoginFXMLController implements Initializable {
     EmployeFacade employeFacade = new EmployeFacade();
 
     @FXML
-    public void connect(ActionEvent actionEvent)  {
+    public void connect(ActionEvent actionEvent) {
         hide_messages();
         if (testChamps()) {
             errorInputs.setVisible(false);
             waiting.setVisible(true);
             PauseTransition pause = new PauseTransition(
-                    Duration.millis(100)
+                    Duration.millis(1)
             );
             pause.setOnFinished(event -> {
                 Connection con;
@@ -87,6 +88,8 @@ public class LoginFXMLController implements Initializable {
                         } else {
                             errorLogin.setVisible(false);
                             try {
+                                Employe employe = employeFacade.getEmployeByLogin(login.getText());
+                                Session.updateAttribute(employe, "connectedUser");
                                 //FORWARD TO THE HOME PAGE NOW ...
                                 KnowledgeHub.forward(actionEvent, "HomeFX.fxml", this.getClass());
                             } catch (IOException ex) {
@@ -123,7 +126,7 @@ public class LoginFXMLController implements Initializable {
             errorInputs.setVisible(true);
         }
     }
-
+    
     private boolean testChamps() {
         if (login.getText().trim().equals("")) {
             return false;
@@ -208,8 +211,8 @@ public class LoginFXMLController implements Initializable {
             setToggle1(false);
         }
     }
-    
-    private void hide_messages(){
+
+    private void hide_messages() {
         errorServer.setVisible(false);
         errorInputs.setVisible(false);
         errorLogin.setVisible(false);
@@ -228,7 +231,7 @@ public class LoginFXMLController implements Initializable {
         setToggle1(true);
         setToggle2(false);
         hide_messages();
-        
+
     }
 
 }

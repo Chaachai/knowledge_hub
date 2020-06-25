@@ -22,11 +22,16 @@
             <VBox layoutY="160.0" prefHeight="356.0" prefWidth="262.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="160.0" />
             <Pane layoutY="86.0" prefHeight="61.0" prefWidth="262.0" style="-fx-background-color: #904aef; -fx-background-radius: 5;">
                <children>
-                  <Label layoutX="25.0" layoutY="17.0" text="Home Space" textFill="WHITE">
+                  <Label fx:id="full_name" layoutX="67.0" layoutY="17.0" text="Youssef Chaachai" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
+                  <ImageView fitHeight="47.0" fitWidth="44.0" layoutX="13.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/avatar.png" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
          </children></AnchorPane>
@@ -56,10 +61,10 @@
                   </Circle>
                   <ImageView fitHeight="49.0" fitWidth="37.0" layoutX="66.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/icons8_Block_50px_1.png" />
+                        <Image url="@../resources/lending_icon_white.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" layoutX="-6.0" layoutY="146.0" prefHeight="17.0" prefWidth="174.0" text="General" textFill="WHITE">
+                  <Label alignment="CENTER" layoutX="-6.0" layoutY="146.0" prefHeight="17.0" prefWidth="174.0" text="Lending Books" textFill="WHITE">
                      <font>
                         <Font name="Arial Bold" size="13.0" />
                      </font></Label>
@@ -67,7 +72,7 @@
             </Pane>
             <Pane layoutX="316.0" layoutY="106.0" prefHeight="202.0" prefWidth="179.0">
                <children>
-                  <Button mnemonicParsing="false" opacity="0.7" prefHeight="190.0" prefWidth="168.0" styleClass="button2" stylesheets="@../css/fullpackstyling.css" />
+                  <Button mnemonicParsing="false" onAction="#toOuvrages" opacity="0.7" prefHeight="190.0" prefWidth="168.0" styleClass="button2" stylesheets="@../css/fullpackstyling.css" />
                   <Circle layoutX="84.0" layoutY="87.0" radius="50.0" strokeType="INSIDE">
                      <stroke>
                         <LinearGradient endX="1.0" endY="1.0">
@@ -88,48 +93,16 @@
                   </Circle>
                   <ImageView fitHeight="49.0" fitWidth="37.0" layoutX="66.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/icons8_Car_52px_2.png" />
+                        <Image url="@../resources/books_icon_white.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" layoutX="1.0" layoutY="146.0" prefHeight="17.0" prefWidth="168.0" text="Transport" textFill="WHITE">
+                  <Label alignment="CENTER" layoutX="1.0" layoutY="146.0" prefHeight="17.0" prefWidth="168.0" text="Manage Books" textFill="WHITE">
                      <font>
                         <Font name="Arial Bold" size="13.0" />
                      </font></Label>
                </children>
             </Pane>
-            <Pane layoutX="71.0" layoutY="354.0" prefHeight="202.0" prefWidth="179.0">
-               <children>
-                  <Button mnemonicParsing="false" opacity="0.7" prefHeight="190.0" prefWidth="168.0" styleClass="button2" stylesheets="@../css/fullpackstyling.css" />
-                  <Circle layoutX="84.0" layoutY="87.0" radius="50.0" strokeType="INSIDE">
-                     <stroke>
-                        <LinearGradient endX="1.0" endY="1.0">
-                           <stops>
-                              <Stop color="BLACK" />
-                              <Stop color="WHITE" offset="1.0" />
-                           </stops>
-                        </LinearGradient>
-                     </stroke>
-                     <fill>
-                        <LinearGradient endX="1.0" endY="1.0" startY="0.4952380952380952">
-                           <stops>
-                              <Stop color="#ff52e2" />
-                              <Stop color="WHITE" offset="1.0" />
-                           </stops>
-                        </LinearGradient>
-                     </fill>
-                  </Circle>
-                  <ImageView fitHeight="49.0" fitWidth="37.0" layoutX="66.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/icons8_Shopping_Cart_50px_2.png" />
-                     </image>
-                  </ImageView>
-                  <Label alignment="CENTER" layoutX="3.0" layoutY="146.0" prefHeight="17.0" prefWidth="168.0" text="Shopping" textFill="WHITE">
-                     <font>
-                        <Font name="Arial Bold" size="13.0" />
-                     </font></Label>
-               </children>
-            </Pane>
-            <Pane layoutX="316.0" layoutY="354.0" prefHeight="202.0" prefWidth="179.0">
+            <Pane layoutX="193.0" layoutY="357.0" prefHeight="202.0" prefWidth="179.0">
                <children>
                   <Button mnemonicParsing="false" opacity="0.7" prefHeight="190.0" prefWidth="168.0" styleClass="button2" stylesheets="@../css/fullpackstyling.css" />
                   <Circle layoutX="84.0" layoutY="87.0" radius="50.0" stroke="#ff924f" strokeType="INSIDE">
@@ -145,18 +118,18 @@
                   </Circle>
                   <ImageView fitHeight="49.0" fitWidth="37.0" layoutX="66.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/icons8_Bill_50px_2.png" />
+                        <Image url="@../resources/students_icon_white.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" layoutX="1.0" layoutY="146.0" prefHeight="17.0" prefWidth="168.0" text="Bill" textFill="WHITE">
+                  <Label alignment="CENTER" layoutX="1.0" layoutY="146.0" prefHeight="17.0" prefWidth="168.0" text="Students Info" textFill="WHITE">
                      <font>
                         <Font name="Arial Bold" size="13.0" />
                      </font></Label>
                </children>
             </Pane>
-            <Pane layoutX="559.0" layoutY="354.0" prefHeight="202.0" prefWidth="179.0">
+            <Pane layoutX="436.0" layoutY="357.0" prefHeight="202.0" prefWidth="179.0">
                <children>
-                  <Button mnemonicParsing="false" opacity="0.7" prefHeight="190.0" prefWidth="168.0" styleClass="button2" stylesheets="@../css/fullpackstyling.css" />
+                  <Button mnemonicParsing="false" onAction="#logout" opacity="0.7" prefHeight="190.0" prefWidth="168.0" styleClass="button2" stylesheets="@../css/fullpackstyling.css" />
                   <Circle layoutX="84.0" layoutY="87.0" radius="50.0" strokeType="INSIDE">
                      <fill>
                         <LinearGradient endX="1.0" endY="1.0" startY="0.4952380952380952">
@@ -170,10 +143,10 @@
                   </Circle>
                   <ImageView fitHeight="49.0" fitWidth="37.0" layoutX="66.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/icons8_Broccoli_64px_2.png" />
+                        <Image url="@../resources/logout_icon_white.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" layoutX="1.0" layoutY="146.0" prefHeight="17.0" prefWidth="168.0" text="Grocery" textFill="WHITE">
+                  <Label alignment="CENTER" layoutX="1.0" layoutY="146.0" prefHeight="17.0" prefWidth="168.0" text="Logout" textFill="WHITE">
                      <font>
                         <Font name="Arial Bold" size="13.0" />
                      </font></Label>
@@ -195,10 +168,10 @@
                   </Circle>
                   <ImageView fitHeight="49.0" fitWidth="37.0" layoutX="66.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/icons8_Play_Button_50px.png" />
+                        <Image url="@../resources/users_icon_white.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" layoutX="1.0" layoutY="146.0" prefHeight="17.0" prefWidth="168.0" text="Entertainment" textFill="WHITE">
+                  <Label alignment="CENTER" layoutX="1.0" layoutY="146.0" prefHeight="17.0" prefWidth="168.0" text="Manage Users" textFill="WHITE">
                      <font>
                         <Font name="Arial Bold" size="13.0" />
                      </font></Label>
@@ -224,68 +197,92 @@
             </Button>
          </children>
       </Pane>
-      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="157.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="262.0" styleClass="button1" stylesheets="@../css/fullpackstyling.css" text="Ben Affleck" textFill="WHITE">
-         <graphic>
-            <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../resources/ben-affleck.png" />
-               </image>
-            </ImageView>
-         </graphic>
-         <padding>
-            <Insets left="40.0" />
-         </padding>
-      </Button>
-      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="309.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="262.0" styleClass="button1" stylesheets="@../css/fullpackstyling.css" text="Jimmy Mason" textFill="WHITE">
-         <graphic>
-            <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../resources/ic_usr.png" />
-               </image>
-            </ImageView>
-         </graphic>
-         <padding>
-            <Insets left="40.0" />
-         </padding>
-      </Button>
-      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="259.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="262.0" styleClass="button1" stylesheets="@../css/fullpackstyling.css" text="Alex Mainman" textFill="WHITE">
-         <graphic>
-            <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../resources/profile-adam-levine.png" />
-               </image>
-            </ImageView>
-         </graphic>
-         <padding>
-            <Insets left="40.0" />
-         </padding>
-      </Button>
-      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="208.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="262.0" styleClass="button1" stylesheets="@../css/fullpackstyling.css" text="Rob Damien" textFill="WHITE">
-         <graphic>
-            <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../resources/profile-james-marsden.png" />
-               </image>
-            </ImageView>
-         </graphic>
-         <padding>
-            <Insets left="40.0" />
-         </padding>
-      </Button>
-      <ImageView fitHeight="136.0" fitWidth="153.0" layoutX="50.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="136.0" fitWidth="153.0" layoutX="50.0" layoutY="457.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../resources/KH_logo.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="73.0" layoutY="615.0" strokeType="OUTSIDE" strokeWidth="0.0" text="© 2020 Knowledge Hub. " textAlignment="CENTER">
+      <Text fill="WHITE" layoutX="73.0" layoutY="622.0" strokeType="OUTSIDE" strokeWidth="0.0" text="© 2020 Knowledge Hub. " textAlignment="CENTER">
          <font>
             <Font size="10.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="89.0" layoutY="629.0" strokeType="OUTSIDE" strokeWidth="0.0" text="All rights reserved" textAlignment="CENTER">
+      <Text fill="WHITE" layoutX="89.0" layoutY="636.0" strokeType="OUTSIDE" strokeWidth="0.0" text="All rights reserved" textAlignment="CENTER">
          <font>
             <Font size="10.0" />
          </font>
       </Text>
+      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="202.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="262.0" styleClass="button1" stylesheets="@../css/fullpackstyling.css" text="Lending Books" textFill="WHITE">
+         <graphic>
+            <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/lending_icon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets left="40.0" />
+         </padding>
+      </Button>
+      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="253.0" mnemonicParsing="false" onAction="#toOuvrages" prefHeight="49.0" prefWidth="262.0" styleClass="button1" stylesheets="@../css/fullpackstyling.css" text="Manage Books" textFill="WHITE">
+         <graphic>
+            <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/books_icon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets left="40.0" />
+         </padding>
+      </Button>
+      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="304.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="262.0" styleClass="button1" stylesheets="@../css/fullpackstyling.css" text="Manage Users" textFill="WHITE">
+         <graphic>
+            <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/users_icon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets left="40.0" />
+         </padding>
+      </Button>
+      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="354.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="262.0" styleClass="button1" stylesheets="@../css/fullpackstyling.css" text="Students Info" textFill="WHITE">
+         <graphic>
+            <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/students_icon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets left="40.0" />
+         </padding>
+      </Button>
+      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="405.0" mnemonicParsing="false" onAction="#logout" prefHeight="49.0" prefWidth="262.0" styleClass="button1" stylesheets="@../css/fullpackstyling.css" text="Logout" textFill="WHITE">
+         <graphic>
+            <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/logout_icon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets left="40.0" />
+         </padding>
+      </Button>
+      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="150.0" mnemonicParsing="false" onAction="#toHome" prefHeight="49.0" prefWidth="262.0" styleClass="button1" stylesheets="@../css/fullpackstyling.css" text="Home" textFill="WHITE">
+         <graphic>
+            <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/home_icon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets left="40.0" />
+         </padding>
+      </Button>
    </children>
 </AnchorPane>

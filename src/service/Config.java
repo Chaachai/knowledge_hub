@@ -37,7 +37,7 @@ public class Config {
 //                System.out.println("Not connected !!");
 //            }
 
-            Session.createAtrribute(con, "connection");
+            Session.updateAttribute(con, "connection");
 
             return con;
         } catch (Exception e) {
