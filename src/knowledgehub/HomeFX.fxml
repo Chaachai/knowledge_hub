@@ -154,7 +154,7 @@
             </Pane>
             <Pane layoutX="559.0" layoutY="106.0" prefHeight="190.0" prefWidth="174.0">
                <children>
-                  <Button mnemonicParsing="false" opacity="0.7" prefHeight="190.0" prefWidth="168.0" styleClass="button2" stylesheets="@../css/fullpackstyling.css" />
+                  <Button mnemonicParsing="false" onAction="#toUsers" opacity="0.7" prefHeight="190.0" prefWidth="168.0" styleClass="button2" stylesheets="@../css/fullpackstyling.css" />
                   <Circle layoutX="84.0" layoutY="87.0" radius="50.0" strokeType="INSIDE">
                      <fill>
                         <LinearGradient endX="1.0" endY="1.0" startY="0.4952380952380952">
@@ -236,7 +236,7 @@
             <Insets left="40.0" />
          </padding>
       </Button>
-      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="304.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="262.0" styleClass="button1" stylesheets="@../css/fullpackstyling.css" text="Manage Users" textFill="WHITE">
+      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="304.0" mnemonicParsing="false" onAction="#toUsers" prefHeight="49.0" prefWidth="262.0" styleClass="button1" stylesheets="@../css/fullpackstyling.css" text="Manage Users" textFill="WHITE">
          <graphic>
             <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -272,7 +272,7 @@
             <Insets left="40.0" />
          </padding>
       </Button>
-      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="150.0" mnemonicParsing="false" onAction="#toHome" prefHeight="49.0" prefWidth="262.0" styleClass="button1" stylesheets="@../css/fullpackstyling.css" text="Home" textFill="WHITE">
+      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="150.0" mnemonicParsing="false" onAction="#toHome" prefHeight="49.0" prefWidth="262.0" styleClass="button3" stylesheets="@../css/fullpackstyling.css" text="Home" textFill="WHITE">
          <graphic>
             <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                <image>

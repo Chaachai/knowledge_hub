@@ -67,6 +67,11 @@ public class HomeController implements Initializable {
     private void toHome(ActionEvent actionEvent) throws IOException {
         KnowledgeHub.forward(actionEvent, "HomeFX.fxml", this.getClass());
     }
+    
+    @FXML
+    private void toUsers(ActionEvent actionEvent) throws IOException {
+        KnowledgeHub.forward(actionEvent, "UserFX.fxml", this.getClass());
+    }
 // 
     /**
      * Initializes the controller class.

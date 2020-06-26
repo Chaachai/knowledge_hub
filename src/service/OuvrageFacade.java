@@ -54,7 +54,7 @@ public class OuvrageFacade {
             return null;
         }
     }
-    
+
     public List<Ouvrage> findOuvrages(String titre) {
         try {
             List<Ouvrage> list = new ArrayList();
@@ -87,5 +87,24 @@ public class OuvrageFacade {
             Logger.getLogger(OuvrageFacade.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
+    }
+
+    public void insertDb(String titre, String editeur, String annee, int stock, int auteur, int domaine) {
+        String query = "insert into ouvrages (id, titre, editeur, annee, stock, auteur_id, domaine_id, nb_ruptures) "
+                + "values (seq_ouvrages.nextval, '" + titre + "', '" + editeur + "', '" + annee + "', " + stock + ", "
+                + auteur + ", " + domaine + ", 0)";
+        c.execQuery(query);
+    }
+
+    public void updateDb(int id, String titre, String editeur, String annee, int stock, int auteur, int domaine) {
+        String query = "update ouvrages set titre = '" + titre + "', editeur = '" + editeur
+                + "', annee = '" + annee + "', stock = " + stock + ", auteur_id = " + auteur
+                + ", domaine_id = " + domaine + " where id = " + id;
+        c.execQuery(query);
+    }
+
+    public void deleteDb(int id) {
+        String query = "delete from ouvrages where id = " + id;
+        c.execQuery(query);
     }
 }

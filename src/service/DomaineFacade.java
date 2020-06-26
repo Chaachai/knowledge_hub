@@ -39,14 +39,14 @@ public class DomaineFacade {
             return null;
         }
     }
-    
-     public List<Domaine> getAllFields() {
+
+    public List<Domaine> getAllFields() {
         try {
             List<Domaine> list = new ArrayList();
             ResultSet rs = c.loadData("SELECT * FROM domaines ");
 
             while (rs.next()) {
-              Domaine domaine = new Domaine();
+                Domaine domaine = new Domaine();
                 domaine.setId(rs.getInt(1));
                 domaine.setNom(rs.getString(2));
                 list.add(domaine);
@@ -56,6 +56,11 @@ public class DomaineFacade {
             System.out.println("SQLEXCEPTION " + ex);
             return null;
         }
+    }
 
+    public void insertDb(String nom) {
+        String query = "insert into domaines (id, nom) values "
+                + "(seq_domaines.nextval, '" + nom + "')";
+        c.execQuery(query);
     }
 }

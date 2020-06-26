@@ -14,6 +14,8 @@ import java.net.URL;
 import java.util.Optional;
 import javafx.scene.control.Alert;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,6 +29,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 import service.AuteurFacade;
 import service.DomaineFacade;
 import service.OuvrageFacade;
@@ -68,6 +71,8 @@ public class OuvrageController implements Initializable {
 
     @FXML
     private TextField field;
+    @FXML
+    private TextField hiddenField;
 
     @FXML
     private Label close;
@@ -128,6 +133,7 @@ public class OuvrageController implements Initializable {
         Ouvrage ouvrage = ouvragesTable.getSelectionModel().getSelectedItem();
         if (ouvrage != null) {
             Session.updateAttribute(ouvrage, "selectedOuvrage");
+            hiddenField.setText(ouvrage.getId() + "");
             bookTitle.setText(ouvrage.getTitre());
             bookPublisher.setText(ouvrage.getEditeur());
             year.setText(ouvrage.getAnnee());
@@ -138,16 +144,108 @@ public class OuvrageController implements Initializable {
         }
     }
 
+    public boolean isBlank(String value) {
+        return (value == null || value.equals("") || value.equals("null") || value.trim().equals(""));
+    }
+
+    public boolean isOnlyNumber(String value) {
+        boolean ret = false;
+        if (!isBlank(value)) {
+            ret = value.matches("^[0-9]+$");
+        }
+        return ret;
+    }
+
+    @FXML
+    private void insertOuvrage(ActionEvent event) {
+        if (!isBlank(bookTitle.getText())) {
+            if (!isBlank(stock.getText())) {
+                ouvrageFacade.insertDb(bookTitle.getText(), bookPublisher.getText(), year.getText(), Integer.valueOf(stock.getText()), auteursCombo.getValue().getId(), fieldCombo.getValue().getId());
+                ouvragesTable.setItems(FXCollections.observableArrayList(ouvrageFacade.getAllOuvrages()));
+                bookTitle.clear();
+                bookPublisher.clear();
+                stock.clear();
+                auteursCombo.setValue(null);
+                fieldCombo.setValue(null);
+                soldOut.clear();
+            } else {
+                JOptionPane.showMessageDialog(null, "Stock quantity is required!", "Stock quantity is required", JOptionPane.OK_OPTION);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "The book title is required!", "Book title is required!", JOptionPane.OK_OPTION);
+        }
+    }
+
+    @FXML
+    private void updateOuvrage(ActionEvent event) {
+        if (isBlank(hiddenField.getText())) {
+            JOptionPane.showMessageDialog(null, "Select a book to update !", "No book was selected", JOptionPane.OK_OPTION);
+        } else {
+            if (!isBlank(bookTitle.getText())) {
+                if (!isBlank(stock.getText())) {
+                    ouvrageFacade.updateDb(Integer.valueOf(hiddenField.getText()), bookTitle.getText(), bookPublisher.getText(), year.getText(), Integer.valueOf(stock.getText()), auteursCombo.getValue().getId(), fieldCombo.getValue().getId());
+                    ouvragesTable.setItems(FXCollections.observableArrayList(ouvrageFacade.getAllOuvrages()));
+                } else {
+                    JOptionPane.showMessageDialog(null, "Stock quantity is required!", "Stock quantity is required", JOptionPane.OK_OPTION);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "The book title is required!", "Book title is required!", JOptionPane.OK_OPTION);
+            }
+        }
+    }
+
+    @FXML
+    private void deleteBook() {
+        if (hiddenField.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Select a book to delete !", "No book was selected", JOptionPane.OK_OPTION);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setHeaderText("WARNING !!");
+            alert.setContentText("You are about to delete the book named '"
+                    + bookTitle.getText().toUpperCase() + "'. \nAre you sure about that ?");
+            alert.setTitle("WARNING !!");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                ouvrageFacade.deleteDb(Integer.valueOf(hiddenField.getText()));
+                ouvragesTable.setItems(FXCollections.observableArrayList(ouvrageFacade.getAllOuvrages()));
+                hiddenField.clear();
+            }
+        }
+    }
+
+    @FXML
+    private void insertAuteur(ActionEvent event) {
+        if (!isBlank(firstName.getText()) || !isBlank(lastName.getText())) {
+            if (!isOnlyNumber(firstName.getText()) && !isOnlyNumber(lastName.getText())) {
+                auteurFacade.insertDb(lastName.getText(), firstName.getText());
+                initComboAuteurs();
+                firstName.clear();
+                lastName.clear();
+                JOptionPane.showMessageDialog(null, "The Author was added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "The name is invalid!", "Invalid name", JOptionPane.OK_OPTION);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Enter at least one name!", "Invalid name", JOptionPane.OK_OPTION);
+        }
+
+    }
+
+    @FXML
+    private void insertField(ActionEvent event) {
+        if (!isBlank(field.getText())) {
+            domaineFacade.insertDb(field.getText());
+            initComboFields();
+            field.clear();
+            JOptionPane.showMessageDialog(null, "The Field was added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "The field name is required!", "Invalid name", JOptionPane.OK_OPTION);
+        }
+    }
+
     @FXML
     private void filterBooks() {
-//        System.out.println("filtering ...");
-//        for (int i = 0; i < ouvragesTable.getItems().size(); i++) {
-//            ouvragesTable.getItems().clear();
-//        }
-//        ouvragesTable.getItems().removeAll();
-//        ouvragesTable.getItems().addAll(ouvrageFacade.findOuvrages(search.getText().toUpperCase()));
         ouvragesTable.setItems(FXCollections.observableArrayList(ouvrageFacade.findOuvrages(search.getText())));
-//        usersFXHelper.setList(ouvrageFacade.findOuvrages(search.getText().toUpperCase()));
     }
 
     @FXML
@@ -185,6 +283,11 @@ public class OuvrageController implements Initializable {
         KnowledgeHub.forward(actionEvent, "HomeFX.fxml", this.getClass());
     }
 
+    @FXML
+    private void toUsers(ActionEvent actionEvent) throws IOException {
+        KnowledgeHub.forward(actionEvent, "UserFX.fxml", this.getClass());
+    }
+
 // 
     /**
      * Initializes the controller class.
@@ -198,6 +301,26 @@ public class OuvrageController implements Initializable {
         initOuvragesTable();
         initComboAuteurs();
         initComboFields();
+
+        stock.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                    String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    stock.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
+        year.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                    String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    year.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
     }
 
 }

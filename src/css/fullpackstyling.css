@@ -33,7 +33,7 @@
 .button3
 {
     -fx-background-color : #141124;
-    -fx-background-radius :  0 0 0 0;
+    -fx-background-radius :  30 0 0 30;
 }
 .button3:hover
 {

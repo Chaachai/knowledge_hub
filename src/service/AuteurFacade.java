@@ -57,6 +57,11 @@ public class AuteurFacade {
             System.out.println("SQLEXCEPTION " + ex);
             return null;
         }
+    }
 
+    public void insertDb(String nom, String prenom) {
+        String query = "insert into auteurs (id, nom, prenom) "
+                + "values (seq_auteurs.nextval, '" + nom + "', '" + prenom + "')";
+        c.execQuery(query);
     }
 }

@@ -5,16 +5,20 @@
  */
 package service;
 
+import beans.Employe;
 import beans.Statut;
 import beans.Universite;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Youssef
  */
 public class StatutFacade {
-    
+
     Config c = new Config();
 
     public Statut findStatutById(int id) {
@@ -34,5 +38,23 @@ public class StatutFacade {
         } else {
             return null;
         }
+    }
+
+    public List<Statut> getAllStatuts() {
+        try {
+            List<Statut> list = new ArrayList();
+            ResultSet rs = c.loadData("SELECT * FROM statuts ");
+            while (rs.next()) {
+                Statut statut = new Statut();
+                statut.setId(rs.getInt(1));
+                statut.setNom(rs.getString(2));
+                list.add(statut);
+            }
+            return list;
+        } catch (SQLException ex) {
+            System.out.println("SQLEXCEPTION " + ex);
+            return null;
+        }
+
     }
 }
