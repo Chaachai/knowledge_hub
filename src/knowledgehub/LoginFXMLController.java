@@ -23,6 +23,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javax.swing.JOptionPane;
 import service.Config;
 import service.EmployeFacade;
 import util.Session;
@@ -45,6 +46,8 @@ public class LoginFXMLController implements Initializable {
     private ImageView toggle2_off;
     @FXML
     private Label close;
+    @FXML
+    private Label signup;
 
     @FXML
     private TextField login;
@@ -61,6 +64,11 @@ public class LoginFXMLController implements Initializable {
     private Label waiting;
 
     EmployeFacade employeFacade = new EmployeFacade();
+
+    @FXML
+    public void toSignup(ActionEvent actionEvent) throws IOException {
+        KnowledgeHub.forward(actionEvent, "SignupFX.fxml", this.getClass());
+    }
 
     @FXML
     public void connect(ActionEvent actionEvent) {
@@ -89,9 +97,20 @@ public class LoginFXMLController implements Initializable {
                             errorLogin.setVisible(false);
                             try {
                                 Employe employe = employeFacade.getEmployeByLogin(login.getText());
-                                Session.updateAttribute(employe, "connectedUser");
-                                //FORWARD TO THE HOME PAGE NOW ...
-                                KnowledgeHub.forward(actionEvent, "HomeFX.fxml", this.getClass());
+                                if (employe.getAccepted() == 0) {
+                                    JOptionPane.showMessageDialog(
+                                            null,
+                                            "You haven't been accepted yet!"
+                                            + "\n You need the confirmation of the dministrator to sign in.",
+                                            "Complete registration!",
+                                            JOptionPane.INFORMATION_MESSAGE
+                                    );
+                                    return;
+                                } else {
+                                    Session.updateAttribute(employe, "connectedUser");
+                                    //FORWARD TO THE HOME PAGE NOW ...
+                                    KnowledgeHub.forward(actionEvent, "HomeFX.fxml", this.getClass());
+                                }
                             } catch (IOException ex) {
                                 Logger.getLogger(LoginFXMLController.class.getName()).log(Level.SEVERE, null, ex);
                             }
@@ -112,8 +131,21 @@ public class LoginFXMLController implements Initializable {
                         } else {
                             errorLogin.setVisible(false);
                             try {
-                                //FORWARD TO THE HOME PAGE NOW ...
-                                KnowledgeHub.forward(actionEvent, "HomeFX.fxml", this.getClass());
+                                Employe employe = employeFacade.getEmployeByLogin(login.getText());
+                                if (employe.getAccepted() == 0) {
+                                    JOptionPane.showMessageDialog(
+                                            null,
+                                            "You haven't been accepted yet!"
+                                            + "\n You need the confirmation of the dministrator to sign in.",
+                                            "Complete registration!",
+                                            JOptionPane.INFORMATION_MESSAGE
+                                    );
+                                    return;
+                                } else {
+                                    Session.updateAttribute(employe, "connectedUser");
+                                    //FORWARD TO THE HOME PAGE NOW ...
+                                    KnowledgeHub.forward(actionEvent, "HomeFX.fxml", this.getClass());
+                                }
                             } catch (IOException ex) {
                                 Logger.getLogger(LoginFXMLController.class.getName()).log(Level.SEVERE, null, ex);
                             }
@@ -126,7 +158,7 @@ public class LoginFXMLController implements Initializable {
             errorInputs.setVisible(true);
         }
     }
-    
+
     private boolean testChamps() {
         if (login.getText().trim().equals("")) {
             return false;

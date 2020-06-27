@@ -3,10 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -16,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="1087.0" style="-fx-background-color: #2F2B43;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="knowledgehub.UserController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="649.0" prefWidth="1087.0" style="-fx-background-color: #2F2B43;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="knowledgehub.ProfileController">
    <children>
       <AnchorPane prefHeight="519.0" prefWidth="262.0" style="-fx-background-color: #393351;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -56,109 +54,63 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <TableView fx:id="usersTable" layoutX="15.0" layoutY="94.0" onMouseClicked="#mouseClickedTable" prefHeight="264.0" prefWidth="792.0" stylesheets="@../css/table_view_style.css">
-              <columns>
-                <TableColumn fx:id="nom_emp" prefWidth="142.0" text="FIRST NAME" />
-                  <TableColumn fx:id="prenom_emp" prefWidth="126.66668701171875" text="LAST NAME" />
-                  <TableColumn fx:id="username_emp" prefWidth="159.0" text="USERNAME" />
-                  <TableColumn fx:id="adresse_emp" minWidth="0.0" prefWidth="249.0" text="ADDRESS" />
-                  <TableColumn fx:id="role_emp" minWidth="0.0" prefWidth="112.33331298828125" text="ROLE" />
-              </columns>
-            </TableView>
-            <TextField fx:id="search" layoutX="21.0" layoutY="37.0" onKeyReleased="#filterUsers" prefHeight="47.0" prefWidth="337.0" promptText="Search" styleClass="my-field" stylesheets="@../css/fullpackstyling.css">
-               <padding>
-                  <Insets left="33.0" />
-               </padding>
-            </TextField>
-            <ImageView fitHeight="17.0" fitWidth="17.0" layoutX="31.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../resources/search_icon.png" />
-               </image>
-            </ImageView>
-            <Pane layoutX="102.0" layoutY="376.0" prefHeight="252.0" prefWidth="629.0" style="-fx-border-color: #b178ff; -fx-border-radius: 5; -fx-background-radius: 5;">
+            <Pane layoutX="114.0" layoutY="108.0" prefHeight="356.0" prefWidth="284.0" style="-fx-border-color: #b178ff; -fx-border-radius: 5; -fx-background-radius: 5;">
                <children>
-                  <ComboBox fx:id="roleCombo" layoutX="392.0" layoutY="129.0" onAction="#comboChanged" prefHeight="32.0" prefWidth="146.0" promptText="Role" styleClass="combo-box" stylesheets="@../css/fullpackstyling.css" />
-                  <Button defaultButton="true" layoutX="395.0" layoutY="215.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="111.0" style="-fx-background-radius: 5; -fx-background-color: #fa2d2d; -fx-border-radius: 5;" text="DELETE USER" textFill="WHITE">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <graphic>
-                        <ImageView fitHeight="14.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../resources/delete_icon.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <TableView fx:id="usersTable2" layoutX="14.0" layoutY="41.0" onMouseClicked="#mouseClickedTable2" prefHeight="199.0" prefWidth="225.0" stylesheets="@../css/table_view_style.css">
-                    <columns>
-                      <TableColumn fx:id="prenom_emp2" prefWidth="114.0" text="First name" />
-                      <TableColumn fx:id="nom_emp2" prefWidth="109.0" text="Last name" />
-                    </columns>
-                  </TableView>
-                  <Label layoutX="313.0" layoutY="37.0" text="Full name :" textFill="WHITE">
+                  <ImageView fitHeight="231.0" fitWidth="231.0" layoutX="23.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/avatar.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="avatar_full_name" alignment="CENTER" layoutX="6.0" layoutY="255.0" prefHeight="35.0" prefWidth="270.0" text="Youssef Chaachai" textAlignment="CENTER" textFill="WHITE">
                      <font>
-                        <Font size="13.0" />
+                        <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="emp_full_name" layoutX="392.0" layoutY="37.0" textFill="WHITE">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="312.0" layoutY="70.0" text="Username :" textFill="WHITE">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="username" layoutX="392.0" layoutY="70.0" textFill="WHITE">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="324.0" layoutY="102.0" text="Address :" textFill="WHITE">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="address" layoutX="392.0" layoutY="102.0" textFill="WHITE">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="344.0" layoutY="135.0" text="Role :" textFill="WHITE">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="318.0" layoutY="174.0" text="Accepted :" textFill="WHITE">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="59.0" layoutY="11.0" text="Pending requests" textFill="WHITE">
+                  <Label fx:id="role" alignment="CENTER" layoutX="10.0" layoutY="304.0" prefHeight="27.0" prefWidth="267.0" text="ADMIN" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <ImageView fx:id="toggle_off" fitHeight="19.0" fitWidth="44.0" layoutX="393.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/toggle_off.png" />
-                     </image>
-                  </ImageView>
-                  <TextField fx:id="hiddenField" layoutX="445.0" layoutY="3.0" visible="false" />
-                  <ImageView fx:id="toggle_on" fitHeight="19.0" fitWidth="44.0" layoutX="393.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/toggle_on.png" />
-                     </image>
-                  </ImageView>
-                  <Button layoutX="393.0" layoutY="171.0" mnemonicParsing="false" onAction="#toggle_clicked" opacity="1.0E-4" prefHeight="25.0" prefWidth="44.0">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
                </children>
             </Pane>
+            <Label layoutX="444.0" layoutY="90.0" text="First name :" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="fname" layoutX="444.0" layoutY="118.0" prefHeight="37.0" prefWidth="262.0" promptText="First name" style="-fx-background-color: #2F2B43; -fx-border-color: #b178ff; -fx-background-radius: 3; -fx-border-radius: 3;" styleClass="my-field" stylesheets="@../css/fullpackstyling.css" />
+            <Label layoutX="444.0" layoutY="166.0" text="Last name" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="lname" layoutX="444.0" layoutY="194.0" prefHeight="37.0" prefWidth="262.0" promptText="Last name" style="-fx-background-color: #2F2B43; -fx-border-color: #b178ff; -fx-background-radius: 3; -fx-border-radius: 3;" styleClass="my-field" stylesheets="@../css/fullpackstyling.css" />
+            <Label layoutX="444.0" layoutY="244.0" text="Username :" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="username" layoutX="444.0" layoutY="272.0" prefHeight="37.0" prefWidth="262.0" promptText="Username" style="-fx-background-color: #2F2B43; -fx-border-color: #b178ff; -fx-background-radius: 3; -fx-border-radius: 3;" styleClass="my-field" stylesheets="@../css/fullpackstyling.css" />
+            <Label layoutX="444.0" layoutY="320.0" text="Address :" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="adresse" layoutX="444.0" layoutY="348.0" prefHeight="37.0" prefWidth="262.0" promptText="Address" style="-fx-background-color: #2F2B43; -fx-border-color: #b178ff; -fx-background-radius: 3; -fx-border-radius: 3;" styleClass="my-field" stylesheets="@../css/fullpackstyling.css" />
+            <Label layoutX="444.0" layoutY="396.0" text="Password :" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="password" layoutX="444.0" layoutY="422.0" prefHeight="37.0" prefWidth="262.0" promptText="Password" styleClass="my-field" stylesheets="@../css/fullpackstyling.css" />
+            <Button defaultButton="true" layoutX="322.0" layoutY="527.0" mnemonicParsing="false" onAction="#updateProfile" prefHeight="40.0" prefWidth="210.0" style="-fx-background-radius: 5; -fx-background-color: #904aef; -fx-border-radius: 5;" text="UPDATE" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
       <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="202.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="262.0" styleClass="button1" stylesheets="@../css/fullpackstyling.css" text="Lending Books" textFill="WHITE">
@@ -185,7 +137,7 @@
             <Insets left="40.0" />
          </padding>
       </Button>
-      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="304.0" mnemonicParsing="false" onAction="#toUsers" prefHeight="49.0" prefWidth="262.0" styleClass="button3" stylesheets="@../css/fullpackstyling.css" text="Manage Users" textFill="WHITE">
+      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="304.0" mnemonicParsing="false" onAction="#toUsers" prefHeight="49.0" prefWidth="262.0" styleClass="button1" stylesheets="@../css/fullpackstyling.css" text="Manage Users" textFill="WHITE">
          <graphic>
             <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -197,9 +149,9 @@
             <Insets left="40.0" />
          </padding>
       </Button>
-      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="354.0" mnemonicParsing="false" onAction="#toProfile" prefHeight="49.0" prefWidth="262.0" styleClass="button1" stylesheets="@../css/fullpackstyling.css" text="Profile" textFill="WHITE">
+      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="354.0" mnemonicParsing="false" onAction="#toProfile" prefHeight="49.0" prefWidth="262.0" styleClass="button3" stylesheets="@../css/fullpackstyling.css" text="Profile" textFill="WHITE">
          <graphic>
-            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../resources/users_icon_red.png" />
                </image>

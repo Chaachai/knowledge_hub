@@ -30,6 +30,7 @@ public class AuteurFacade {
                     auteur.setNom(rs.getString(2));
                     auteur.setPrenom(rs.getString(3));
                 }
+                rs.close();
                 return auteur;
             } catch (Exception e) {
                 System.out.println(e);
@@ -52,6 +53,7 @@ public class AuteurFacade {
                 auteur.setPrenom(rs.getString(3));
                 list.add(auteur);
             }
+            rs.close();
             return list;
         } catch (SQLException ex) {
             System.out.println("SQLEXCEPTION " + ex);

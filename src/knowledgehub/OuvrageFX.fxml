@@ -226,11 +226,11 @@
             <Insets left="40.0" />
          </padding>
       </Button>
-      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="354.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="262.0" styleClass="button1" stylesheets="@../css/fullpackstyling.css" text="Students Info" textFill="WHITE">
+      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="354.0" mnemonicParsing="false" onAction="#toProfile" prefHeight="49.0" prefWidth="262.0" styleClass="button1" stylesheets="@../css/fullpackstyling.css" text="Profile" textFill="WHITE">
          <graphic>
-            <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="29.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../resources/students_icon.png" />
+                  <Image url="@../resources/users_icon_red.png" />
                </image>
             </ImageView>
          </graphic>

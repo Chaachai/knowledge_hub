@@ -65,28 +65,29 @@
 }
 .combo-box
 {
-    -fx-background-color : #141124;
-    -fx-border-color:  #515658;
-    -fx-border-radius: 30;
     -fx-text-fill: WHITE;
-     -fx-font-size: 14px;
-    -fx-prompt-text-fill: WHITE;
+    -fx-prompt-text-fill: GRAY;
+    -fx-font-size: 14px;
+    -fx-border-color: #b178ff;
+    -fx-background-color:  #2F2B43;
+    -fx-background-radius: 3;
+    -fx-border-radius: 3;
 }
 .combo-box:hover
 {
-    -fx-background-color : #141124;
+    /*-fx-background-color : #141124;*/
     -fx-border-color:  #FFFF;
-    -fx-border-radius: 30;
-    -fx-text-fill: WHITE;
-    -fx-prompt-text-fill: WHITE;
+    /*-fx-border-radius: 30;*/
+    /*-fx-text-fill: WHITE;*/
+    /*-fx-prompt-text-fill: WHITE;*/
 }
 .combo-box:pressed
 {
-    -fx-background-color : #141124;
+    /*-fx-background-color : #141124;*/
     -fx-border-color:  #FFFF;
-    -fx-border-radius: 30;
-    -fx-text-fill: WHITE;
-    -fx-prompt-text-fill: WHITE;
+    /*-fx-border-radius: 30;*/
+    /*-fx-text-fill: WHITE;*/
+    /*-fx-prompt-text-fill: WHITE;*/
 }
 
 
@@ -174,22 +175,29 @@
 
 .my-field {
 	-fx-text-fill: WHITE;
+    -fx-prompt-text-fill: GRAY;
 	-fx-font-size: 14px;
+    -fx-border-color: #b178ff;
+    -fx-background-color:  #2F2B43;
+    -fx-background-radius: 3;
+    -fx-border-radius: 3;
     /*-fx-focus-color: WHITE;*/
     /*-fx-unfocus-color: WHITE;*/
 }
-/*.my-field:focused {
-  -fx-prompt-text-fill: WHITE;
-    -fx-focus-color: WHITE;
-    -fx-unfocus-color: WHITE;
+.my-field:hover {
+    -fx-border-color:  #FFFF;
 }
-*/
-.my-combo {
-    -fx-text-fill: WHITE;
-    -fx-prompt-text-fill: #ffffff;
+.my-field:focused {
+    -fx-border-color: #FFFF;
+}
+
+.my-combo:hover {
+   -fx-text-fill: WHITE;
     -fx-font-size: 14px;
+  /*-fx-prompt-text-fill: WHITE;*/
     /*-fx-focus-color: WHITE;*/
     /*-fx-unfocus-color: WHITE;*/
+    -fx-border-color: #FFFF;
 }
 
 
@@ -205,3 +213,4 @@
 .fuckin-combo-box-popup .list-view .list-cell:filled:selected, .combo-box-popup .list-view .list-cell:filled:selected:hover{
     -fx-background-color: #783cc9;
 }
+

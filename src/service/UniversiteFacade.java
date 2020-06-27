@@ -26,6 +26,7 @@ public class UniversiteFacade {
                     universite.setId(rs.getInt(1));
                     universite.setNom(rs.getString(2));
                 }
+                rs.close();
                 return universite;
             } catch (Exception e) {
                 System.out.println(e);

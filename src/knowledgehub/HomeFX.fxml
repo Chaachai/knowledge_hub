@@ -104,7 +104,7 @@
             </Pane>
             <Pane layoutX="193.0" layoutY="357.0" prefHeight="202.0" prefWidth="179.0">
                <children>
-                  <Button mnemonicParsing="false" opacity="0.7" prefHeight="190.0" prefWidth="168.0" styleClass="button2" stylesheets="@../css/fullpackstyling.css" />
+                  <Button mnemonicParsing="false" onAction="#toProfile" opacity="0.7" prefHeight="190.0" prefWidth="168.0" styleClass="button2" stylesheets="@../css/fullpackstyling.css" />
                   <Circle layoutX="84.0" layoutY="87.0" radius="50.0" stroke="#ff924f" strokeType="INSIDE">
                      <fill>
                         <LinearGradient endX="1.0" endY="1.0" startY="0.4952380952380952">
@@ -118,10 +118,10 @@
                   </Circle>
                   <ImageView fitHeight="49.0" fitWidth="37.0" layoutX="66.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/students_icon_white.png" />
+                        <Image url="@../resources/user_icon_white.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" layoutX="1.0" layoutY="146.0" prefHeight="17.0" prefWidth="168.0" text="Students Info" textFill="WHITE">
+                  <Label alignment="CENTER" layoutX="1.0" layoutY="146.0" prefHeight="17.0" prefWidth="168.0" text="Profile" textFill="WHITE">
                      <font>
                         <Font name="Arial Bold" size="13.0" />
                      </font></Label>
@@ -248,11 +248,11 @@
             <Insets left="40.0" />
          </padding>
       </Button>
-      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="354.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="262.0" styleClass="button1" stylesheets="@../css/fullpackstyling.css" text="Students Info" textFill="WHITE">
+      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="354.0" mnemonicParsing="false" onAction="#toProfile" prefHeight="49.0" prefWidth="262.0" styleClass="button1" stylesheets="@../css/fullpackstyling.css" text="Profile" textFill="WHITE">
          <graphic>
-            <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../resources/students_icon.png" />
+                  <Image url="@../resources/users_icon_red.png" />
                </image>
             </ImageView>
          </graphic>

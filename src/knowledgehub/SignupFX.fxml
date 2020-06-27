@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="330.0" style="-fx-background-color: #2F2B43;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="knowledgehub.SignupController">
+   <children>
+      <TextField fx:id="fname" layoutX="59.0" layoutY="169.0" prefHeight="34.0" prefWidth="210.0" promptText="First name" styleClass="my-field" stylesheets="@../css/fullpackstyling.css" />
+      <TextField fx:id="lname" layoutX="59.0" layoutY="217.0" prefHeight="34.0" prefWidth="210.0" promptText="Last name" styleClass="my-field" stylesheets="@../css/fullpackstyling.css" />
+      <TextField fx:id="username" layoutX="59.0" layoutY="264.0" prefHeight="34.0" prefWidth="210.0" promptText="Username" styleClass="my-field" stylesheets="@../css/fullpackstyling.css" />
+      <PasswordField fx:id="password" layoutX="59.0" layoutY="311.0" prefHeight="34.0" prefWidth="210.0" promptText="Password" styleClass="my-field" stylesheets="@../css/fullpackstyling.css" />
+      <ComboBox fx:id="facultyCombo" layoutX="59.0" layoutY="358.0" prefHeight="34.0" prefWidth="210.0" promptText="Faculty" stylesheets="@../css/fullpackstyling.css" />
+      <TextField fx:id="address" layoutX="59.0" layoutY="403.0" prefHeight="34.0" prefWidth="210.0" promptText="Neighborhood" styleClass="my-field" stylesheets="@../css/fullpackstyling.css" />
+      <Button defaultButton="true" layoutX="59.0" layoutY="461.0" mnemonicParsing="false" onAction="#signup" prefHeight="33.0" prefWidth="210.0" style="-fx-background-radius: 5; -fx-background-color: #904aef; -fx-border-radius: 5;" text="SIGN UP" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Label layoutX="104.0" layoutY="516.0" onMouseClicked="#toLogin" text="Return to login page" textFill="#b178ff" underline="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Button fx:id="minimize" layoutX="255.0" layoutY="9.0" mnemonicParsing="false" onAction="#minimizeApp" opacity="0.01" prefHeight="3.0" prefWidth="28.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Label id="close" fx:id="close" layoutX="302.0" layoutY="8.0" onMouseClicked="#closeApp" text="X" textFill="WHITE">
+         <font>
+            <Font name="Berlin Sans FB" size="23.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+      <Label layoutX="262.0" layoutY="-2.0" text="-" textFill="WHITE">
+         <font>
+            <Font name="Berlin Sans FB" size="42.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="99.0" fitWidth="130.0" layoutX="108.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/KH_logo.png" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="108.0" layoutY="569.0" strokeType="OUTSIDE" strokeWidth="0.0" text="© 2020 Knowledge Hub. " textAlignment="CENTER">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="124.0" layoutY="583.0" strokeType="OUTSIDE" strokeWidth="0.0" text="All rights reserved" textAlignment="CENTER">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Text>
+      <Label fx:id="errorUsername" layoutX="82.0" layoutY="143.0" text="The username is already taken!" textFill="RED" visible="false">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </Label>
+      <Label fx:id="errorInputs" layoutX="97.0" layoutY="143.0" text="All the fields are required!" textFill="RED" visible="false">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </Label>
+      <Button layoutX="108.0" layoutY="513.0" mnemonicParsing="false" onAction="#toLogin" opacity="1.0E-5" prefHeight="0.0" prefWidth="111.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label fx:id="errorServer" layoutX="90.0" layoutY="143.0" text="The server is not reachable :(" textFill="RED" visible="false">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </Label>
+      <Label fx:id="waiting" layoutX="58.0" layoutY="143.0" text="Trying to reach the server, please wait ..." textFill="#ffc817" visible="false">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </Label>
+   </children>
+</AnchorPane>

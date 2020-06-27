@@ -69,6 +69,7 @@ public class Config {
             System.out.println(query);
             System.out.println("*****************************");
             stmt.executeUpdate(query);
+            stmt.close();
             return 1;
         } catch (SQLException ex) {
             Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);

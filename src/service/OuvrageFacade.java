@@ -48,6 +48,7 @@ public class OuvrageFacade {
                 ouvrage.setNb_ruptures(rs.getInt(9));
                 list.add(ouvrage);
             }
+            rs.close();
             return list;
         } catch (SQLException ex) {
             System.out.println("SQLEXCEPTION " + ex);

@@ -30,6 +30,7 @@ public class DomaineFacade {
                     domaine.setId(rs.getInt(1));
                     domaine.setNom(rs.getString(2));
                 }
+                rs.close();
                 return domaine;
             } catch (Exception e) {
                 System.out.println(e);
@@ -51,6 +52,7 @@ public class DomaineFacade {
                 domaine.setNom(rs.getString(2));
                 list.add(domaine);
             }
+            rs.close();
             return list;
         } catch (SQLException ex) {
             System.out.println("SQLEXCEPTION " + ex);

@@ -19,6 +19,7 @@ public class Employe {
     private String password;
     private Statut statut;
     private Universite universite;
+    private int accepted;
 
     public int getId() {
         return id;
@@ -84,6 +85,14 @@ public class Employe {
         this.universite = universite;
     }
 
+    public int getAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted(int accepted) {
+        this.accepted = accepted;
+    }
+    
     @Override
     public String toString() {
         return nom + " " + prenom;

@@ -14,12 +14,12 @@
 
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="330.0" style="-fx-background-color: #2F2B43;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="knowledgehub.LoginFXMLController">
    <children>
-      <TextField fx:id="login" layoutX="60.0" layoutY="230.0" prefHeight="47.0" prefWidth="210.0" promptText="Username" style="-fx-background-color: #2F2B43; -fx-border-color: #b178ff; -fx-background-radius: 3; -fx-border-radius: 3;" styleClass="my-field" stylesheets="@../css/fullpackstyling.css">
+      <TextField fx:id="login" layoutX="60.0" layoutY="230.0" prefHeight="47.0" prefWidth="210.0" promptText="Username" styleClass="my-field" stylesheets="@../css/fullpackstyling.css">
          <padding>
             <Insets left="33.0" />
          </padding>
       </TextField>
-      <PasswordField fx:id="password" layoutX="60.0" layoutY="286.0" prefHeight="47.0" prefWidth="210.0" promptText="Password" style="-fx-background-color: #2F2B43; -fx-border-color: #b178ff; -fx-background-radius: 3; -fx-border-radius: 3;" styleClass="my-field" stylesheets="@../css/fullpackstyling.css">
+      <PasswordField fx:id="password" layoutX="60.0" layoutY="286.0" prefHeight="47.0" prefWidth="210.0" promptText="Password" styleClass="my-field" stylesheets="@../css/fullpackstyling.css">
          <padding>
             <Insets left="33.0" />
          </padding>
@@ -64,11 +64,6 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Label layoutX="122.0" layoutY="508.0" text="Reset password" textFill="#b178ff" underline="true">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Label>
       <Text fill="WHITE" layoutX="108.0" layoutY="569.0" strokeType="OUTSIDE" strokeWidth="0.0" text="© 2020 Knowledge Hub. " textAlignment="CENTER">
          <font>
             <Font size="10.0" />
@@ -119,23 +114,36 @@
          </cursor></Button>
       <Label fx:id="errorServer" layoutX="90.0" layoutY="196.0" text="The server is not reachable :(" textFill="RED" visible="false">
          <cursor>
-            <Cursor fx:constant="HAND" />
+            <Cursor fx:constant="DEFAULT" />
          </cursor>
       </Label>
       <Label fx:id="errorLogin" layoutX="49.0" layoutY="196.0" text="The username or the password is incorrect !" textFill="RED" visible="false">
          <cursor>
-            <Cursor fx:constant="HAND" />
+            <Cursor fx:constant="DEFAULT" />
          </cursor>
       </Label>
       <Label fx:id="errorInputs" layoutX="42.0" layoutY="196.0" text="The username and the password are required !" textFill="RED" visible="false">
          <cursor>
-            <Cursor fx:constant="HAND" />
+            <Cursor fx:constant="DEFAULT" />
          </cursor>
       </Label>
-      <Label fx:id="waiting" layoutX="58.0" layoutY="196.0" text="Trying to reach the server, please wait ..." textFill="#ffc817">
+      <Label fx:id="waiting" layoutX="58.0" layoutY="196.0" text="Trying to reach the server, please wait ..." textFill="#ffc817" visible="false">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </Label>
+      <Label layoutX="106.0" layoutY="517.0" text="Create new account" textFill="#b178ff" underline="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <font>
+            <Font size="13.0" />
+         </font>
       </Label>
+      <Button layoutX="109.0" layoutY="514.0" mnemonicParsing="false" onAction="#toSignup" opacity="1.0E-5" prefHeight="0.0" prefWidth="111.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>

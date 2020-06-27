@@ -30,6 +30,7 @@ public class StatutFacade {
                     statut.setId(rs.getInt(1));
                     statut.setNom(rs.getString(2));
                 }
+                rs.close();
                 return statut;
             } catch (Exception e) {
                 System.out.println(e);
@@ -50,6 +51,7 @@ public class StatutFacade {
                 statut.setNom(rs.getString(2));
                 list.add(statut);
             }
+            rs.close();
             return list;
         } catch (SQLException ex) {
             System.out.println("SQLEXCEPTION " + ex);

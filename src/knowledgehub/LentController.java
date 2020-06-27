@@ -40,7 +40,7 @@ import util.Session;
  *
  * @author CHAACHAI Youssef
  */
-public class OuvrageController implements Initializable {
+public class LentController implements Initializable {
 
     @FXML
     private TextField search;
@@ -286,11 +286,6 @@ public class OuvrageController implements Initializable {
     @FXML
     private void toUsers(ActionEvent actionEvent) throws IOException {
         KnowledgeHub.forward(actionEvent, "UserFX.fxml", this.getClass());
-    }
-
-    @FXML
-    private void toProfile(ActionEvent actionEvent) throws IOException {
-        KnowledgeHub.forward(actionEvent, "ProfileFX.fxml", this.getClass());
     }
 
 // 
