@@ -8,9 +8,14 @@ package knowledgehub;
 import beans.Auteur;
 import beans.Domaine;
 import beans.Employe;
+import beans.Etudiant;
 import beans.Ouvrage;
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.Optional;
 import javafx.scene.control.Alert;
 import java.util.ResourceBundle;
@@ -23,6 +28,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -32,7 +38,9 @@ import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import service.AuteurFacade;
 import service.DomaineFacade;
+import service.EtudiantFacade;
 import service.OuvrageFacade;
+import service.PretFacade;
 import util.Session;
 
 /**
@@ -44,35 +52,43 @@ public class LentController implements Initializable {
 
     @FXML
     private TextField search;
+    @FXML
+    private TextField searchStudent;
 
     @FXML
-    private TextField bookTitle;
+    private Label bookTitle;
 
     @FXML
-    private TextField bookPublisher;
+    private Label bookAuthor;
 
     @FXML
-    private TextField year;
+    private Label year;
 
     @FXML
-    private TextField stock;
+    private Label stock;
 
     @FXML
-    private TextField soldOut;
+    private Label field;
 
     @FXML
-    private ComboBox<Domaine> fieldCombo;
+    private Label student_name;
+    @FXML
+    private Label student_faculty;
+    @FXML
+    private Label student_sector;
+    @FXML
+    private Label student_address;
+    @FXML
+    private Label student_borrowings;
+    @FXML
+    private Label student_blocked;
 
     @FXML
-    private TextField firstName;
-
+    private Label booknotSelected;
     @FXML
-    private TextField lastName;
-
+    private Label studentNotFound;
     @FXML
-    private TextField field;
-    @FXML
-    private TextField hiddenField;
+    private Label provideAllInfo;
 
     @FXML
     private Label close;
@@ -80,27 +96,28 @@ public class LentController implements Initializable {
     private Label full_name;
 
     @FXML
+    private Label lendbookTitle;
+    @FXML
+    private Label lendbookStudent;
+    @FXML
+    private Label lendbookBorrowDate;
+
+    @FXML
+    private DatePicker lendbookExpectedDate;
+
+    Employe employeSession = (Employe) Session.getAttribut("connectedUser");
+
+    @FXML
     private TableView<Ouvrage> ouvragesTable = new TableView<Ouvrage>();
 
     @FXML
     private TableColumn<Ouvrage, String> ouvrage_titre = new TableColumn<Ouvrage, String>();
 
-    @FXML
-    private TableColumn<Ouvrage, String> ouvrage_editeur = new TableColumn<Ouvrage, String>();
-    @FXML
-    private TableColumn<Ouvrage, String> ouvrage_annee = new TableColumn<Ouvrage, String>();
-    @FXML
-    private TableColumn<Ouvrage, Integer> ouvrage_stock = new TableColumn<Ouvrage, Integer>();
-    @FXML
-    private TableColumn<Ouvrage, Auteur> ouvrage_auteur = new TableColumn<Ouvrage, Auteur>();
-    @FXML
-    private TableColumn<Ouvrage, Domaine> ouvrage_domaine = new TableColumn<Ouvrage, Domaine>();
-    @FXML
-    private TableColumn<Ouvrage, Integer> ouvrage_ruptures = new TableColumn<Ouvrage, Integer>();
-
     OuvrageFacade ouvrageFacade = new OuvrageFacade();
     AuteurFacade auteurFacade = new AuteurFacade();
     DomaineFacade domaineFacade = new DomaineFacade();
+    PretFacade pretFacade = new PretFacade();
+    EtudiantFacade etudiantFacade = new EtudiantFacade();
 
     @FXML
     private ComboBox<Auteur> auteursCombo = new ComboBox<>();
@@ -108,39 +125,21 @@ public class LentController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    private void initComboAuteurs() {
-        auteursCombo.setItems(FXCollections.observableArrayList(auteurFacade.getAllAuteurs()));
-
-    }
-
-    private void initComboFields() {
-        fieldCombo.setItems(FXCollections.observableArrayList(domaineFacade.getAllFields()));
-
-    }
-
     public void initOuvragesTable() {
-        ouvragesTable.getItems().addAll(ouvrageFacade.getAllOuvrages());
+        ouvragesTable.getItems().addAll(ouvrageFacade.getAllOuvrages(employeSession.getUniversite().getId()));
         ouvrage_titre.setCellValueFactory(new PropertyValueFactory<>("titre"));
-        ouvrage_editeur.setCellValueFactory(new PropertyValueFactory<>("editeur"));
-        ouvrage_annee.setCellValueFactory(new PropertyValueFactory<>("annee"));
-        ouvrage_stock.setCellValueFactory(new PropertyValueFactory<>("stock"));
-        ouvrage_auteur.setCellValueFactory(new PropertyValueFactory<>("auteur"));
-        ouvrage_domaine.setCellValueFactory(new PropertyValueFactory<>("domaine"));
-        ouvrage_ruptures.setCellValueFactory(new PropertyValueFactory<>("nb_ruptures"));
+
     }
 
     public void mouseClickedTable() {
         Ouvrage ouvrage = ouvragesTable.getSelectionModel().getSelectedItem();
         if (ouvrage != null) {
             Session.updateAttribute(ouvrage, "selectedOuvrage");
-            hiddenField.setText(ouvrage.getId() + "");
             bookTitle.setText(ouvrage.getTitre());
-            bookPublisher.setText(ouvrage.getEditeur());
+            bookAuthor.setText(ouvrage.getAuteur().getNom() + " " + ouvrage.getAuteur().getPrenom());
             year.setText(ouvrage.getAnnee());
             stock.setText(ouvrage.getStock() + "");
-            soldOut.setText(ouvrage.getNb_ruptures() + "");
-            auteursCombo.getSelectionModel().select(ouvrage.getAuteur());
-            fieldCombo.getSelectionModel().select(ouvrage.getDomaine());
+            field.setText(ouvrage.getDomaine().getNom() + "");
         }
     }
 
@@ -157,95 +156,8 @@ public class LentController implements Initializable {
     }
 
     @FXML
-    private void insertOuvrage(ActionEvent event) {
-        if (!isBlank(bookTitle.getText())) {
-            if (!isBlank(stock.getText())) {
-                ouvrageFacade.insertDb(bookTitle.getText(), bookPublisher.getText(), year.getText(), Integer.valueOf(stock.getText()), auteursCombo.getValue().getId(), fieldCombo.getValue().getId());
-                ouvragesTable.setItems(FXCollections.observableArrayList(ouvrageFacade.getAllOuvrages()));
-                bookTitle.clear();
-                bookPublisher.clear();
-                stock.clear();
-                auteursCombo.setValue(null);
-                fieldCombo.setValue(null);
-                soldOut.clear();
-            } else {
-                JOptionPane.showMessageDialog(null, "Stock quantity is required!", "Stock quantity is required", JOptionPane.OK_OPTION);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "The book title is required!", "Book title is required!", JOptionPane.OK_OPTION);
-        }
-    }
-
-    @FXML
-    private void updateOuvrage(ActionEvent event) {
-        if (isBlank(hiddenField.getText())) {
-            JOptionPane.showMessageDialog(null, "Select a book to update !", "No book was selected", JOptionPane.OK_OPTION);
-        } else {
-            if (!isBlank(bookTitle.getText())) {
-                if (!isBlank(stock.getText())) {
-                    ouvrageFacade.updateDb(Integer.valueOf(hiddenField.getText()), bookTitle.getText(), bookPublisher.getText(), year.getText(), Integer.valueOf(stock.getText()), auteursCombo.getValue().getId(), fieldCombo.getValue().getId());
-                    ouvragesTable.setItems(FXCollections.observableArrayList(ouvrageFacade.getAllOuvrages()));
-                } else {
-                    JOptionPane.showMessageDialog(null, "Stock quantity is required!", "Stock quantity is required", JOptionPane.OK_OPTION);
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "The book title is required!", "Book title is required!", JOptionPane.OK_OPTION);
-            }
-        }
-    }
-
-    @FXML
-    private void deleteBook() {
-        if (hiddenField.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Select a book to delete !", "No book was selected", JOptionPane.OK_OPTION);
-        } else {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setHeaderText("WARNING !!");
-            alert.setContentText("You are about to delete the book named '"
-                    + bookTitle.getText().toUpperCase() + "'. \nAre you sure about that ?");
-            alert.setTitle("WARNING !!");
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK) {
-                ouvrageFacade.deleteDb(Integer.valueOf(hiddenField.getText()));
-                ouvragesTable.setItems(FXCollections.observableArrayList(ouvrageFacade.getAllOuvrages()));
-                hiddenField.clear();
-            }
-        }
-    }
-
-    @FXML
-    private void insertAuteur(ActionEvent event) {
-        if (!isBlank(firstName.getText()) || !isBlank(lastName.getText())) {
-            if (!isOnlyNumber(firstName.getText()) && !isOnlyNumber(lastName.getText())) {
-                auteurFacade.insertDb(lastName.getText(), firstName.getText());
-                initComboAuteurs();
-                firstName.clear();
-                lastName.clear();
-                JOptionPane.showMessageDialog(null, "The Author was added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(null, "The name is invalid!", "Invalid name", JOptionPane.OK_OPTION);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Enter at least one name!", "Invalid name", JOptionPane.OK_OPTION);
-        }
-
-    }
-
-    @FXML
-    private void insertField(ActionEvent event) {
-        if (!isBlank(field.getText())) {
-            domaineFacade.insertDb(field.getText());
-            initComboFields();
-            field.clear();
-            JOptionPane.showMessageDialog(null, "The Field was added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, "The field name is required!", "Invalid name", JOptionPane.OK_OPTION);
-        }
-    }
-
-    @FXML
     private void filterBooks() {
-        ouvragesTable.setItems(FXCollections.observableArrayList(ouvrageFacade.findOuvrages(search.getText())));
+        ouvragesTable.setItems(FXCollections.observableArrayList(ouvrageFacade.findOuvrages(search.getText(), employeSession.getUniversite().getId())));
     }
 
     @FXML
@@ -279,8 +191,8 @@ public class LentController implements Initializable {
     }
 
     @FXML
-    private void toHome(ActionEvent actionEvent) throws IOException {
-        KnowledgeHub.forward(actionEvent, "HomeFX.fxml", this.getClass());
+    private void toReturnBooks(ActionEvent actionEvent) throws IOException {
+        KnowledgeHub.forward(actionEvent, "ReturnBookFX.fxml", this.getClass());
     }
 
     @FXML
@@ -288,39 +200,111 @@ public class LentController implements Initializable {
         KnowledgeHub.forward(actionEvent, "UserFX.fxml", this.getClass());
     }
 
-// 
+    @FXML
+    private void toLendingBooks(ActionEvent actionEvent) throws IOException {
+        KnowledgeHub.forward(actionEvent, "LentFX.fxml", this.getClass());
+    }
+
+    @FXML
+    private void toProfile(ActionEvent actionEvent) throws IOException {
+        KnowledgeHub.forward(actionEvent, "ProfileFX.fxml", this.getClass());
+    }
+
+    public void selectbook() {
+//        Ouvrage ouvrage = ouvragesTable.getSelectionModel().getSelectedItem();
+        if (!isBlank(bookTitle.getText())) {
+            lendbookTitle.setText(bookTitle.getText());
+        } else {
+            booknotSelected.setVisible(true);
+        }
+    }
+
+    public void showStudent() {
+        Etudiant etudiant = etudiantFacade.getEtudiantByCne(searchStudent.getText());
+        if (!isBlank(searchStudent.getText()) && etudiant != null) {
+            Session.updateAttribute(etudiant, "selectedEtudiant");
+            studentNotFound.setVisible(false);
+            student_name.setText(etudiant.getNom().toUpperCase() + " " + etudiant.getPrenom());
+            student_address.setText(etudiant.getAdresse());
+            student_faculty.setText(etudiant.getUniversite().getNom());
+            student_sector.setText(etudiant.getCursus().getNom());
+            if (etudiant.getBloque() == 1) {
+                student_blocked.setText("YES");
+            } else {
+                student_blocked.setText("No");
+            }
+            if (etudiant.getNb_emprunts() >= 2) {
+                student_borrowings.setText(etudiant.getNb_emprunts() + " Times");
+            } else {
+                student_borrowings.setText(etudiant.getNb_emprunts() + " Time");
+            }
+
+        } else {
+            studentNotFound.setVisible(true);
+            student_name.setText("");
+            student_address.setText("");
+            student_blocked.setText("");
+            student_sector.setText("");
+            student_borrowings.setText("");
+            student_faculty.setText("");
+        }
+    }
+
+    public void selectstudent() {
+        if (!isBlank(student_name.getText())) {
+            lendbookStudent.setText(student_name.getText());
+        } else {
+            studentNotFound.setVisible(true);
+        }
+    }
+
+    public void insertPret(ActionEvent actionEvent) throws IOException {
+        if (!isBlank(lendbookStudent.getText()) && !isBlank(lendbookTitle.getText()) && lendbookExpectedDate.getValue() != null) {
+            provideAllInfo.setVisible(false);
+            Ouvrage ouvrage = (Ouvrage) Session.getAttribut("selectedOuvrage");
+            if (ouvrage.getStock() == 0) {
+                JOptionPane.showMessageDialog(null, "Sorry, it seems that this book is out of stock right now, please come back later", "Out of stock ", JOptionPane.OK_OPTION);
+            } else {
+                Etudiant etudiant = (Etudiant) Session.getAttribut("selectedEtudiant");
+                if (etudiant.getNb_emprunts() == 3) {
+                    JOptionPane.showMessageDialog(null, "Sorry, it seems that this student has exceeded the limit number of borrowings", "Limit exceeded", JOptionPane.OK_OPTION);
+                } else {
+                    Date input = new Date();
+                    LocalDate mDate = input.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                    pretFacade.insertDb(etudiant.getId(), ouvrage.getId(), mDate, lendbookExpectedDate.getValue());
+                    JOptionPane.showMessageDialog(null, "The operation is done successfully :)", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    KnowledgeHub.forward(actionEvent, "LentFX.fxml", this.getClass());
+                    Session.delete("selectedEtudiant");
+                    Session.delete("selectedOuvrage");
+                }
+            }
+        } else {
+            provideAllInfo.setVisible(true);
+        }
+    }
+
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb
-    ) {
+    public void initialize(URL url, ResourceBundle rb) {
         // TODO
         Employe employe = (Employe) Session.getAttribut("connectedUser");
         full_name.setText(employe.getPrenom() + " " + employe.getNom());
         initOuvragesTable();
-        initComboAuteurs();
-        initComboFields();
 
-        stock.textProperty().addListener(new ChangeListener<String>() {
+        searchStudent.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                     String newValue) {
                 if (!newValue.matches("\\d*")) {
-                    stock.setText(newValue.replaceAll("[^\\d]", ""));
+                    searchStudent.setText(newValue.replaceAll("[^\\d]", ""));
                 }
             }
         });
 
-        year.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue,
-                    String newValue) {
-                if (!newValue.matches("\\d*")) {
-                    year.setText(newValue.replaceAll("[^\\d]", ""));
-                }
-            }
-        });
+        SimpleDateFormat mdyFormat = new SimpleDateFormat("dd-MM-yyyy");
+        lendbookBorrowDate.setText(mdyFormat.format(new Date()));
     }
 
 }

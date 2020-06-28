@@ -73,6 +73,8 @@ public class UserController implements Initializable {
     @FXML
     private Pane pane;
 
+    Employe employeSession = (Employe) Session.getAttribut("connectedUser");
+
     @FXML
     private TableView<Employe> usersTable = new TableView<Employe>();
 
@@ -109,7 +111,7 @@ public class UserController implements Initializable {
     }
 
     public void initUsersTable() {
-        usersTable.getItems().addAll(employeFacade.getAllEmployes());
+        usersTable.getItems().addAll(employeFacade.getAllEmployes(employeSession.getUniversite().getId()));
         nom_emp.setCellValueFactory(new PropertyValueFactory<>("nom"));
         prenom_emp.setCellValueFactory(new PropertyValueFactory<>("prenom"));
         username_emp.setCellValueFactory(new PropertyValueFactory<>("username"));
@@ -118,7 +120,7 @@ public class UserController implements Initializable {
     }
 
     public void initUsersTable2() {
-        usersTable2.getItems().addAll(employeFacade.getPendingEmployes());
+        usersTable2.getItems().addAll(employeFacade.getPendingEmployes(employeSession.getUniversite().getId()));
         nom_emp2.setCellValueFactory(new PropertyValueFactory<>("nom"));
         prenom_emp2.setCellValueFactory(new PropertyValueFactory<>("prenom"));
     }
@@ -159,7 +161,7 @@ public class UserController implements Initializable {
 
     @FXML
     private void filterUsers() {
-        usersTable.setItems(FXCollections.observableArrayList(employeFacade.findEmployes(search.getText())));
+        usersTable.setItems(FXCollections.observableArrayList(employeFacade.findEmployes(search.getText(), employeSession.getUniversite().getId())));
     }
 
     @FXML
@@ -193,16 +195,21 @@ public class UserController implements Initializable {
     }
 
     @FXML
-    private void toHome(ActionEvent actionEvent) throws IOException {
-        KnowledgeHub.forward(actionEvent, "HomeFX.fxml", this.getClass());
+    private void toReturnBooks(ActionEvent actionEvent) throws IOException {
+        KnowledgeHub.forward(actionEvent, "ReturnBookFX.fxml", this.getClass());
     }
 
     @FXML
     private void toUsers(ActionEvent actionEvent) throws IOException {
         KnowledgeHub.forward(actionEvent, "UserFX.fxml", this.getClass());
     }
-    
-     @FXML
+
+    @FXML
+    private void toLendingBooks(ActionEvent actionEvent) throws IOException {
+        KnowledgeHub.forward(actionEvent, "LentFX.fxml", this.getClass());
+    }
+
+    @FXML
     private void toProfile(ActionEvent actionEvent) throws IOException {
         KnowledgeHub.forward(actionEvent, "ProfileFX.fxml", this.getClass());
     }
@@ -227,12 +234,11 @@ public class UserController implements Initializable {
             Employe employe = (Employe) Session.getAttribut("selectedEmploye");
             employe.setStatut(roleCombo.getValue());
             employeFacade.updateDb(employe);
-            usersTable.setItems(FXCollections.observableArrayList(employeFacade.getAllEmployes()));
-            usersTable2.setItems(FXCollections.observableArrayList(employeFacade.getPendingEmployes()));
+            usersTable.setItems(FXCollections.observableArrayList(employeFacade.getAllEmployes(employeSession.getUniversite().getId())));
+            usersTable2.setItems(FXCollections.observableArrayList(employeFacade.getPendingEmployes(employeSession.getUniversite().getId())));
         }
     }
-    
-    
+
 //    @FXML
 //    public void delete_user(ActionEvent actionevent){
 //        if (!hiddenField.getText().isEmpty()) {
@@ -240,7 +246,6 @@ public class UserController implements Initializable {
 //            
 //        }
 //    }
-
     @FXML
     public void toggle_clicked() {
         if (!hiddenField.getText().isEmpty()) {
@@ -253,8 +258,8 @@ public class UserController implements Initializable {
                 setToggle(true);
             }
             employeFacade.updateDb(employe);
-            usersTable.setItems(FXCollections.observableArrayList(employeFacade.getAllEmployes()));
-            usersTable2.setItems(FXCollections.observableArrayList(employeFacade.getPendingEmployes()));
+            usersTable.setItems(FXCollections.observableArrayList(employeFacade.getAllEmployes(employeSession.getUniversite().getId())));
+            usersTable2.setItems(FXCollections.observableArrayList(employeFacade.getPendingEmployes(employeSession.getUniversite().getId())));
         }
     }
 

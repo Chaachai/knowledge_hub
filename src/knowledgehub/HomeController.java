@@ -58,14 +58,14 @@ public class HomeController implements Initializable {
         }
     }
 
-    @FXML
+   @FXML
     private void toOuvrages(ActionEvent actionEvent) throws IOException {
         KnowledgeHub.forward(actionEvent, "OuvrageFX.fxml", this.getClass());
     }
 
     @FXML
-    private void toHome(ActionEvent actionEvent) throws IOException {
-        KnowledgeHub.forward(actionEvent, "HomeFX.fxml", this.getClass());
+    private void toReturnBooks(ActionEvent actionEvent) throws IOException {
+        KnowledgeHub.forward(actionEvent, "ReturnBookFX.fxml", this.getClass());
     }
 
     @FXML
@@ -73,6 +73,11 @@ public class HomeController implements Initializable {
         KnowledgeHub.forward(actionEvent, "UserFX.fxml", this.getClass());
     }
 
+    @FXML
+    private void toLendingBooks(ActionEvent actionEvent) throws IOException {
+        KnowledgeHub.forward(actionEvent, "LentFX.fxml", this.getClass());
+    }
+    
     @FXML
     private void toProfile(ActionEvent actionEvent) throws IOException {
         KnowledgeHub.forward(actionEvent, "ProfileFX.fxml", this.getClass());

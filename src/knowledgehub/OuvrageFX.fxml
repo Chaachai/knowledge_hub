@@ -190,7 +190,7 @@
             </Pane>
          </children>
       </Pane>
-      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="202.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="262.0" styleClass="button1" stylesheets="@../css/fullpackstyling.css" text="Lending Books" textFill="WHITE">
+      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="202.0" mnemonicParsing="false" onAction="#toLendingBooks" prefHeight="49.0" prefWidth="262.0" styleClass="button1" stylesheets="@../css/fullpackstyling.css" text="Lending Books" textFill="WHITE">
          <graphic>
             <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -265,11 +265,11 @@
             <Font size="10.0" />
          </font>
       </Text>
-      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="150.0" mnemonicParsing="false" onAction="#toHome" prefHeight="49.0" prefWidth="262.0" styleClass="button1" stylesheets="@../css/fullpackstyling.css" text="Home" textFill="WHITE">
+      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="150.0" mnemonicParsing="false" onAction="#toReturnBooks" prefHeight="49.0" prefWidth="262.0" styleClass="button1" stylesheets="@../css/fullpackstyling.css" text="Return Books" textFill="WHITE">
          <graphic>
             <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../resources/home_icon.png" />
+                  <Image url="@../resources/return_book_icon_violet.png" />
                </image>
             </ImageView>
          </graphic>

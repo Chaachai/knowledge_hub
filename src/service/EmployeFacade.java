@@ -5,19 +5,15 @@
  */
 package service;
 
-import beans.Domaine;
 import beans.Employe;
 import beans.Statut;
 import beans.Universite;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.management.relation.Role;
-import util.Session;
 
 /**
  *
@@ -89,19 +85,19 @@ public class EmployeFacade {
 
     }
 
-    public List<Employe> getAllEmployes() {
-        return getEmployesByResultSet(c.loadData("SELECT * FROM employes WHERE accepted = 1"));
+    public List<Employe> getAllEmployes(int univ_id) {
+        return getEmployesByResultSet(c.loadData("SELECT * FROM employes WHERE accepted = 1 and universite_id = " + univ_id));
     }
 
-    public List<Employe> getPendingEmployes() {
-        return getEmployesByResultSet(c.loadData("SELECT * FROM employes WHERE accepted = 0"));
+    public List<Employe> getPendingEmployes(int univ_id) {
+        return getEmployesByResultSet(c.loadData("SELECT * FROM employes WHERE accepted = 0 and universite_id = " + univ_id));
     }
 
-    public List<Employe> findEmployes(String nom) {
+    public List<Employe> findEmployes(String nom, int univ_id) {
         ResultSet rs = c.loadData(
                 "SELECT * FROM employes "
-                + "WHERE LOWER(nom) like LOWER('%" + nom + "%') "
-                + "OR LOWER(prenom) like LOWER('%" + nom + "%') "
+                + "WHERE accepted = 1 AND universite_id = " + univ_id + " AND (LOWER(nom) like LOWER('%" + nom + "%') "
+                + "OR LOWER(prenom) like LOWER('%" + nom + "%')) "
         );
         return getEmployesByResultSet(rs);
     }

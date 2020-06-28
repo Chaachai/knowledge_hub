@@ -129,7 +129,7 @@ public class SignupController implements Initializable {
                         errorServer.setVisible(true);
                     }
                 } else {
-                    con = config.connect("system", "system", "192.168.1.107", "fssm");
+                    con = config.connect("system", "system", "192.168.1.107", "fst2");
                     if (con != null) {
                         waiting.setVisible(false);
                         if (!employeFacade.usernameUsed(username.getText())) {

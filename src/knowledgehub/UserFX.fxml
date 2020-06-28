@@ -78,18 +78,6 @@
             <Pane layoutX="102.0" layoutY="376.0" prefHeight="252.0" prefWidth="629.0" style="-fx-border-color: #b178ff; -fx-border-radius: 5; -fx-background-radius: 5;">
                <children>
                   <ComboBox fx:id="roleCombo" layoutX="392.0" layoutY="129.0" onAction="#comboChanged" prefHeight="32.0" prefWidth="146.0" promptText="Role" styleClass="combo-box" stylesheets="@../css/fullpackstyling.css" />
-                  <Button defaultButton="true" layoutX="395.0" layoutY="215.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="111.0" style="-fx-background-radius: 5; -fx-background-color: #fa2d2d; -fx-border-radius: 5;" text="DELETE USER" textFill="WHITE">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <graphic>
-                        <ImageView fitHeight="14.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../resources/delete_icon.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
                   <TableView fx:id="usersTable2" layoutX="14.0" layoutY="41.0" onMouseClicked="#mouseClickedTable2" prefHeight="199.0" prefWidth="225.0" stylesheets="@../css/table_view_style.css">
                     <columns>
                       <TableColumn fx:id="prenom_emp2" prefWidth="114.0" text="First name" />
@@ -161,7 +149,7 @@
             </Pane>
          </children>
       </Pane>
-      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="202.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="262.0" styleClass="button1" stylesheets="@../css/fullpackstyling.css" text="Lending Books" textFill="WHITE">
+      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="202.0" mnemonicParsing="false" onAction="#toLendingBooks" prefHeight="49.0" prefWidth="262.0" styleClass="button1" stylesheets="@../css/fullpackstyling.css" text="Lending Books" textFill="WHITE">
          <graphic>
             <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -236,11 +224,11 @@
             <Font size="10.0" />
          </font>
       </Text>
-      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="150.0" mnemonicParsing="false" onAction="#toHome" prefHeight="49.0" prefWidth="262.0" styleClass="button1" stylesheets="@../css/fullpackstyling.css" text="Home" textFill="WHITE">
+      <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutY="150.0" mnemonicParsing="false" onAction="#toReturnBooks" prefHeight="49.0" prefWidth="262.0" styleClass="button1" stylesheets="@../css/fullpackstyling.css" text="Return Books" textFill="WHITE">
          <graphic>
             <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../resources/home_icon.png" />
+                  <Image url="@../resources/return_book_icon_violet.png" />
                </image>
             </ImageView>
          </graphic>

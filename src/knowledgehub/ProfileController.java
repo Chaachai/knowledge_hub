@@ -97,13 +97,18 @@ public class ProfileController implements Initializable {
     }
 
     @FXML
-    private void toHome(ActionEvent actionEvent) throws IOException {
-        KnowledgeHub.forward(actionEvent, "HomeFX.fxml", this.getClass());
+    private void toReturnBooks(ActionEvent actionEvent) throws IOException {
+        KnowledgeHub.forward(actionEvent, "ReturnBookFX.fxml", this.getClass());
     }
 
     @FXML
     private void toUsers(ActionEvent actionEvent) throws IOException {
         KnowledgeHub.forward(actionEvent, "UserFX.fxml", this.getClass());
+    }
+
+    @FXML
+    private void toLendingBooks(ActionEvent actionEvent) throws IOException {
+        KnowledgeHub.forward(actionEvent, "LentFX.fxml", this.getClass());
     }
 
     @FXML
@@ -114,19 +119,28 @@ public class ProfileController implements Initializable {
     @FXML
     private void updateProfile(ActionEvent actionEvent) throws IOException {
         if (!isBlank(fname.getText()) && !isBlank(lname.getText()) && !isBlank(adresse.getText()) && !isBlank(username.getText()) && !isBlank(password.getText())) {
-            if (!employeFacade.usernameUsed(username.getText())) {
-                Employe employe = (Employe) Session.getAttribut("connectedUser");
+            Employe employe = (Employe) Session.getAttribut("connectedUser");
+            if (!employe.getUsername().equalsIgnoreCase(username.getText())) {
+                if (employeFacade.usernameUsed(username.getText())) {
+                    JOptionPane.showMessageDialog(null, "The username is already taken", "Error!", JOptionPane.OK_OPTION);
+                    return;
+                } else {
+                    employe.setPrenom(fname.getText());
+                    employe.setNom(lname.getText());
+                    employe.setAdresse(adresse.getText());
+                    employe.setUsername(username.getText());
+                    employe.setPassword(password.getText());
+                }
+            } else {
                 employe.setPrenom(fname.getText());
                 employe.setNom(lname.getText());
                 employe.setAdresse(adresse.getText());
                 employe.setUsername(username.getText());
                 employe.setPassword(password.getText());
-                employeFacade.updateDb(employe);
-                JOptionPane.showMessageDialog(null, "Your profile has been updated successfully", "Success!", JOptionPane.INFORMATION_MESSAGE);
-                KnowledgeHub.forward(actionEvent, "ProfileFX.fxml", this.getClass());
-            } else {
-                JOptionPane.showMessageDialog(null, "The username is already taken", "Error!", JOptionPane.OK_OPTION);
             }
+            employeFacade.updateDb(employe);
+            JOptionPane.showMessageDialog(null, "Your profile has been updated successfully", "Success!", JOptionPane.INFORMATION_MESSAGE);
+            KnowledgeHub.forward(actionEvent, "ProfileFX.fxml", this.getClass());
         } else {
             JOptionPane.showMessageDialog(null, "All fields are required!", "Error!", JOptionPane.OK_OPTION);
         }

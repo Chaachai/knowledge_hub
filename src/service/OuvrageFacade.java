@@ -27,85 +27,75 @@ public class OuvrageFacade {
     AuteurFacade auteurFacade = new AuteurFacade();
     DomaineFacade domaineFacade = new DomaineFacade();
 
-    public List<Ouvrage> getAllOuvrages() {
-        try {
+    public List<Ouvrage> getOuvragesByResultSet(ResultSet result) {
+        if (result != null) {
             List<Ouvrage> list = new ArrayList();
-            ResultSet rs = c.loadData("SELECT * FROM ouvrages ");
-
-            while (rs.next()) {
-                Ouvrage ouvrage = new Ouvrage();
-                ouvrage.setId(rs.getInt(1));
-                ouvrage.setTitre(rs.getString(2));
-                ouvrage.setEditeur(rs.getString(3));
-                ouvrage.setAnnee(rs.getString(4));
-                ouvrage.setStock(rs.getInt(5));
-                Universite universite = universiteFacade.findUniversiteById(rs.getInt(6));
-                ouvrage.setUniversite(universite);
-                Auteur auteur = auteurFacade.findAuteurById(rs.getInt(7));
-                ouvrage.setAuteur(auteur);
-                Domaine domaine = domaineFacade.findDomaineById(rs.getInt(8));
-                ouvrage.setDomaine(domaine);
-                ouvrage.setNb_ruptures(rs.getInt(9));
-                list.add(ouvrage);
+            try {
+                while (result.next()) {
+                    Ouvrage ouvrage = new Ouvrage();
+                    ouvrage.setId(result.getInt(1));
+                    ouvrage.setTitre(result.getString(2));
+                    ouvrage.setEditeur(result.getString(3));
+                    ouvrage.setAnnee(result.getString(4));
+                    ouvrage.setStock(result.getInt(5));
+                    Universite universite = universiteFacade.findUniversiteById(result.getInt(6));
+                    ouvrage.setUniversite(universite);
+                    Auteur auteur = auteurFacade.findAuteurById(result.getInt(7));
+                    ouvrage.setAuteur(auteur);
+                    Domaine domaine = domaineFacade.findDomaineById(result.getInt(8));
+                    ouvrage.setDomaine(domaine);
+                    ouvrage.setNb_ruptures(result.getInt(9));
+                    list.add(ouvrage);
+                }
+                result.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(EmployeFacade.class.getName()).log(Level.SEVERE, null, ex);
             }
-            rs.close();
             return list;
-        } catch (SQLException ex) {
-            System.out.println("SQLEXCEPTION " + ex);
+        } else {
             return null;
         }
     }
 
-    public List<Ouvrage> findOuvrages(String titre) {
-        try {
-            List<Ouvrage> list = new ArrayList();
-
-            ResultSet rs = c.loadData(
-                    "SELECT * "
-                    + "FROM ouvrages "
-                    + "WHERE LOWER(titre) like LOWER('%" + titre + "%') "
-            );
-
-            while (rs.next()) {
-                Ouvrage ouvrage = new Ouvrage();
-                ouvrage.setId(rs.getInt(1));
-                ouvrage.setTitre(rs.getString(2));
-                ouvrage.setEditeur(rs.getString(3));
-                ouvrage.setAnnee(rs.getString(4));
-                ouvrage.setStock(rs.getInt(5));
-                Universite universite = universiteFacade.findUniversiteById(rs.getInt(6));
-                ouvrage.setUniversite(universite);
-                Auteur auteur = auteurFacade.findAuteurById(rs.getInt(7));
-                ouvrage.setAuteur(auteur);
-                Domaine domaine = domaineFacade.findDomaineById(rs.getInt(8));
-                ouvrage.setDomaine(domaine);
-                ouvrage.setNb_ruptures(rs.getInt(9));
-                list.add(ouvrage);
-            }
-            rs.close();
-            return list;
-        } catch (SQLException ex) {
-            Logger.getLogger(OuvrageFacade.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
+    public List<Ouvrage> getAllOuvrages(int univ_id) {
+        return getOuvragesByResultSet(c.loadData("SELECT * FROM ouvrages where universite_id = " + univ_id));
     }
 
-    public void insertDb(String titre, String editeur, String annee, int stock, int auteur, int domaine) {
-        String query = "insert into ouvrages (id, titre, editeur, annee, stock, auteur_id, domaine_id, nb_ruptures) "
+    public List<Ouvrage> findOuvrages(String titre, int univ_id) {
+        ResultSet rs = c.loadData(
+                "SELECT * "
+                + "FROM ouvrages "
+                + "WHERE universite_id = " + univ_id + " AND LOWER(titre) like LOWER('%" + titre + "%') "
+        );
+        return getOuvragesByResultSet(rs);
+    }
+
+    public void insertDb(String titre, String editeur, String annee, int stock, int auteur, int domaine, int universite_id) {
+        String query = "insert into ouvrages (id, titre, editeur, annee, stock, auteur_id, domaine_id, nb_ruptures, universite_id) "
                 + "values (seq_ouvrages.nextval, '" + titre + "', '" + editeur + "', '" + annee + "', " + stock + ", "
-                + auteur + ", " + domaine + ", 0)";
+                + auteur + ", " + domaine + ", 0, " + universite_id + ")";
         c.execQuery(query);
     }
 
-    public void updateDb(int id, String titre, String editeur, String annee, int stock, int auteur, int domaine) {
+    public void updateDb(int id, String titre, String editeur, String annee, int stock, int auteur, int domaine, int universite_id) {
         String query = "update ouvrages set titre = '" + titre + "', editeur = '" + editeur
                 + "', annee = '" + annee + "', stock = " + stock + ", auteur_id = " + auteur
-                + ", domaine_id = " + domaine + " where id = " + id;
+                + ", domaine_id = " + domaine + ", universite_id = " + universite_id + " where id = " + id;
         c.execQuery(query);
     }
 
     public void deleteDb(int id) {
         String query = "delete from ouvrages where id = " + id;
         c.execQuery(query);
+    }
+
+    public Ouvrage getOuvrageById(int id) {
+        ResultSet rs = c.loadData("SELECT * FROM ouvrages WHERE id = " + id);
+        List<Ouvrage> ouvrages = getOuvragesByResultSet(rs);
+        if (ouvrages != null && !ouvrages.isEmpty()) {
+            return ouvrages.get(0);
+        } else {
+            return null;
+        }
     }
 }

@@ -79,6 +79,8 @@ public class OuvrageController implements Initializable {
     @FXML
     private Label full_name;
 
+    Employe employeSession = (Employe) Session.getAttribut("connectedUser");
+
     @FXML
     private TableView<Ouvrage> ouvragesTable = new TableView<Ouvrage>();
 
@@ -119,7 +121,7 @@ public class OuvrageController implements Initializable {
     }
 
     public void initOuvragesTable() {
-        ouvragesTable.getItems().addAll(ouvrageFacade.getAllOuvrages());
+        ouvragesTable.getItems().addAll(ouvrageFacade.getAllOuvrages(employeSession.getUniversite().getId()));
         ouvrage_titre.setCellValueFactory(new PropertyValueFactory<>("titre"));
         ouvrage_editeur.setCellValueFactory(new PropertyValueFactory<>("editeur"));
         ouvrage_annee.setCellValueFactory(new PropertyValueFactory<>("annee"));
@@ -160,8 +162,8 @@ public class OuvrageController implements Initializable {
     private void insertOuvrage(ActionEvent event) {
         if (!isBlank(bookTitle.getText())) {
             if (!isBlank(stock.getText())) {
-                ouvrageFacade.insertDb(bookTitle.getText(), bookPublisher.getText(), year.getText(), Integer.valueOf(stock.getText()), auteursCombo.getValue().getId(), fieldCombo.getValue().getId());
-                ouvragesTable.setItems(FXCollections.observableArrayList(ouvrageFacade.getAllOuvrages()));
+                ouvrageFacade.insertDb(bookTitle.getText(), bookPublisher.getText(), year.getText(), Integer.valueOf(stock.getText()), auteursCombo.getValue().getId(), fieldCombo.getValue().getId(), employeSession.getUniversite().getId());
+                ouvragesTable.setItems(FXCollections.observableArrayList(ouvrageFacade.getAllOuvrages(employeSession.getUniversite().getId())));
                 bookTitle.clear();
                 bookPublisher.clear();
                 stock.clear();
@@ -183,8 +185,8 @@ public class OuvrageController implements Initializable {
         } else {
             if (!isBlank(bookTitle.getText())) {
                 if (!isBlank(stock.getText())) {
-                    ouvrageFacade.updateDb(Integer.valueOf(hiddenField.getText()), bookTitle.getText(), bookPublisher.getText(), year.getText(), Integer.valueOf(stock.getText()), auteursCombo.getValue().getId(), fieldCombo.getValue().getId());
-                    ouvragesTable.setItems(FXCollections.observableArrayList(ouvrageFacade.getAllOuvrages()));
+                    ouvrageFacade.updateDb(Integer.valueOf(hiddenField.getText()), bookTitle.getText(), bookPublisher.getText(), year.getText(), Integer.valueOf(stock.getText()), auteursCombo.getValue().getId(), fieldCombo.getValue().getId(), employeSession.getUniversite().getId());
+                    ouvragesTable.setItems(FXCollections.observableArrayList(ouvrageFacade.getAllOuvrages(employeSession.getUniversite().getId())));
                 } else {
                     JOptionPane.showMessageDialog(null, "Stock quantity is required!", "Stock quantity is required", JOptionPane.OK_OPTION);
                 }
@@ -207,7 +209,7 @@ public class OuvrageController implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 ouvrageFacade.deleteDb(Integer.valueOf(hiddenField.getText()));
-                ouvragesTable.setItems(FXCollections.observableArrayList(ouvrageFacade.getAllOuvrages()));
+                ouvragesTable.setItems(FXCollections.observableArrayList(ouvrageFacade.getAllOuvrages(employeSession.getUniversite().getId())));
                 hiddenField.clear();
             }
         }
@@ -245,7 +247,7 @@ public class OuvrageController implements Initializable {
 
     @FXML
     private void filterBooks() {
-        ouvragesTable.setItems(FXCollections.observableArrayList(ouvrageFacade.findOuvrages(search.getText())));
+        ouvragesTable.setItems(FXCollections.observableArrayList(ouvrageFacade.findOuvrages(search.getText(), employeSession.getUniversite().getId())));
     }
 
     @FXML
@@ -279,13 +281,18 @@ public class OuvrageController implements Initializable {
     }
 
     @FXML
-    private void toHome(ActionEvent actionEvent) throws IOException {
-        KnowledgeHub.forward(actionEvent, "HomeFX.fxml", this.getClass());
+    private void toReturnBooks(ActionEvent actionEvent) throws IOException {
+        KnowledgeHub.forward(actionEvent, "ReturnBookFX.fxml", this.getClass());
     }
 
     @FXML
     private void toUsers(ActionEvent actionEvent) throws IOException {
         KnowledgeHub.forward(actionEvent, "UserFX.fxml", this.getClass());
+    }
+
+    @FXML
+    private void toLendingBooks(ActionEvent actionEvent) throws IOException {
+        KnowledgeHub.forward(actionEvent, "LentFX.fxml", this.getClass());
     }
 
     @FXML
