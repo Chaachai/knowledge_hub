@@ -114,7 +114,7 @@
                   <TextField fx:id="hiddenField1" layoutX="249.0" layoutY="13.0" visible="false" />
                   <TableView fx:id="ouvragesTable" layoutX="17.0" layoutY="94.0" onMouseClicked="#mouseClickedTable" prefHeight="243.0" prefWidth="296.0" stylesheets="@../css/table_view_style.css">
                     <columns>
-                      <TableColumn fx:id="ouvrage_titre" prefWidth="294.0" text="BOOK TITLE" />
+                      <TableColumn fx:id="ouvrage_titre" prefWidth="280.0" text="BOOK TITLE" />
                     </columns>
                   </TableView>
                   <TextField fx:id="search" layoutX="17.0" layoutY="43.0" onKeyReleased="#filterBooks" prefHeight="37.0" prefWidth="293.0" promptText="Search" style="-fx-background-color: #2F2B43; -fx-border-color: #b178ff; -fx-background-radius: 3; -fx-border-radius: 3;" styleClass="my-field" stylesheets="@../css/fullpackstyling.css">

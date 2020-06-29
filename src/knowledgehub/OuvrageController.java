@@ -58,9 +58,6 @@ public class OuvrageController implements Initializable {
     private TextField stock;
 
     @FXML
-    private TextField soldOut;
-
-    @FXML
     private ComboBox<Domaine> fieldCombo;
 
     @FXML
@@ -97,8 +94,6 @@ public class OuvrageController implements Initializable {
     private TableColumn<Ouvrage, Auteur> ouvrage_auteur = new TableColumn<Ouvrage, Auteur>();
     @FXML
     private TableColumn<Ouvrage, Domaine> ouvrage_domaine = new TableColumn<Ouvrage, Domaine>();
-    @FXML
-    private TableColumn<Ouvrage, Integer> ouvrage_ruptures = new TableColumn<Ouvrage, Integer>();
 
     OuvrageFacade ouvrageFacade = new OuvrageFacade();
     AuteurFacade auteurFacade = new AuteurFacade();
@@ -128,7 +123,6 @@ public class OuvrageController implements Initializable {
         ouvrage_stock.setCellValueFactory(new PropertyValueFactory<>("stock"));
         ouvrage_auteur.setCellValueFactory(new PropertyValueFactory<>("auteur"));
         ouvrage_domaine.setCellValueFactory(new PropertyValueFactory<>("domaine"));
-        ouvrage_ruptures.setCellValueFactory(new PropertyValueFactory<>("nb_ruptures"));
     }
 
     public void mouseClickedTable() {
@@ -140,7 +134,6 @@ public class OuvrageController implements Initializable {
             bookPublisher.setText(ouvrage.getEditeur());
             year.setText(ouvrage.getAnnee());
             stock.setText(ouvrage.getStock() + "");
-            soldOut.setText(ouvrage.getNb_ruptures() + "");
             auteursCombo.getSelectionModel().select(ouvrage.getAuteur());
             fieldCombo.getSelectionModel().select(ouvrage.getDomaine());
         }
@@ -167,9 +160,9 @@ public class OuvrageController implements Initializable {
                 bookTitle.clear();
                 bookPublisher.clear();
                 stock.clear();
+                year.clear();
                 auteursCombo.setValue(null);
                 fieldCombo.setValue(null);
-                soldOut.clear();
             } else {
                 JOptionPane.showMessageDialog(null, "Stock quantity is required!", "Stock quantity is required", JOptionPane.OK_OPTION);
             }

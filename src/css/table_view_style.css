@@ -6,6 +6,16 @@
     -fx-background-color: transparent;
 }
 
+.table-view .filler{
+    -fx-background-color: transparent; 
+}
+
+.table-view .scroll-bar :vertical > .increment-button,
+.table-view .scroll-bar :vertical > .increment-button {
+    -fx-background-color: blue;
+}
+
+
 .table-view:focused{
     -fx-background-color: transparent;
 }

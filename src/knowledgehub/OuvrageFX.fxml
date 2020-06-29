@@ -58,13 +58,12 @@
             </Button>
             <TableView fx:id="ouvragesTable" layoutX="17.0" layoutY="95.0" onMouseClicked="#mouseClickedTable" prefHeight="224.0" prefWidth="789.0" stylesheets="@../css/table_view_style.css">
               <columns>
-                <TableColumn fx:id="ouvrage_titre" prefWidth="216.0" text="TITLE" />
-                  <TableColumn fx:id="ouvrage_editeur" prefWidth="127.0" text="PUBLISHER" />
-                  <TableColumn fx:id="ouvrage_annee" prefWidth="54.0" text="YEAR" />
-                  <TableColumn fx:id="ouvrage_stock" prefWidth="48.0" text="STOCK" />
-                  <TableColumn fx:id="ouvrage_auteur" prefWidth="158.33331298828125" text="AUTHOR" />
-                  <TableColumn fx:id="ouvrage_domaine" prefWidth="116.66668701171875" text="FIELD" />
-                  <TableColumn fx:id="ouvrage_ruptures" prefWidth="66.33331298828125" text="SOLD OUT" />
+                <TableColumn fx:id="ouvrage_titre" prefWidth="253.0" text="TITLE" />
+                  <TableColumn fx:id="ouvrage_editeur" prefWidth="152.0" text="PUBLISHER" />
+                  <TableColumn fx:id="ouvrage_annee" prefWidth="56.0" text="YEAR" />
+                  <TableColumn fx:id="ouvrage_stock" prefWidth="52.0" text="STOCK" />
+                  <TableColumn fx:id="ouvrage_auteur" prefWidth="148.0" text="AUTHOR" />
+                  <TableColumn fx:id="ouvrage_domaine" prefWidth="113.0" text="FIELD" />
               </columns>
             </TableView>
             <TextField fx:id="search" layoutX="19.0" layoutY="37.0" onKeyReleased="#filterBooks" prefHeight="47.0" prefWidth="403.0" promptText="Search" style="-fx-background-color: #2F2B43; -fx-border-color: #b178ff; -fx-background-radius: 3; -fx-border-radius: 3;" styleClass="my-field" stylesheets="@../css/fullpackstyling.css">
@@ -94,8 +93,7 @@
                   <TextField fx:id="bookTitle" layoutX="30.0" layoutY="69.0" prefHeight="33.0" prefWidth="187.0" promptText="Title" style="-fx-background-color: #2F2B43; -fx-border-color: #b178ff; -fx-background-radius: 3; -fx-border-radius: 3;" styleClass="my-field" stylesheets="@../css/fullpackstyling.css" />
                   <TextField fx:id="bookPublisher" layoutX="30.0" layoutY="129.0" prefHeight="33.0" prefWidth="187.0" promptText="Publisher" style="-fx-background-color: #2F2B43; -fx-border-color: #b178ff; -fx-background-radius: 3; -fx-border-radius: 3;" styleClass="my-field" stylesheets="@../css/fullpackstyling.css" />
                   <TextField fx:id="year" layoutX="30.0" layoutY="187.0" prefHeight="33.0" prefWidth="187.0" promptText="Year" style="-fx-background-color: #2F2B43; -fx-border-color: #b178ff; -fx-background-radius: 3; -fx-border-radius: 3;" styleClass="my-field" stylesheets="@../css/fullpackstyling.css" />
-                  <TextField fx:id="stock" layoutX="31.0" layoutY="247.0" prefHeight="33.0" prefWidth="89.0" promptText="Stock" style="-fx-background-color: #2F2B43; -fx-border-color: #b178ff; -fx-background-radius: 3; -fx-border-radius: 3;" styleClass="my-field" stylesheets="@../css/fullpackstyling.css" />
-                  <TextField fx:id="soldOut" disable="true" layoutX="128.0" layoutY="247.0" prefHeight="33.0" prefWidth="89.0" promptText="Sold out" style="-fx-background-color: #2F2B43; -fx-border-color: #b178ff; -fx-background-radius: 3; -fx-border-radius: 3;" styleClass="my-field" stylesheets="@../css/fullpackstyling.css" />
+                  <TextField fx:id="stock" layoutX="31.0" layoutY="247.0" prefHeight="33.0" prefWidth="187.0" promptText="Stock" style="-fx-background-color: #2F2B43; -fx-border-color: #b178ff; -fx-background-radius: 3; -fx-border-radius: 3;" styleClass="my-field" stylesheets="@../css/fullpackstyling.css" />
                   <ComboBox fx:id="auteursCombo" layoutX="232.0" layoutY="69.0" prefHeight="33.0" prefWidth="187.0" promptText="Author" style="-fx-background-color: #2F2B43; -fx-border-color: #b178ff; -fx-border-radius: 3; -fx-background-radius: 3;" styleClass="combo-box-popup" stylesheets="@../css/fullpackstyling.css" />
                   <ComboBox fx:id="fieldCombo" layoutX="232.0" layoutY="130.0" prefHeight="33.0" prefWidth="187.0" promptText="Field" style="-fx-background-color: #2F2B43; -fx-border-color: #b178ff; -fx-border-radius: 3; -fx-background-radius: 3;" stylesheets="@../css/fullpackstyling.css" />
                   <Button defaultButton="true" layoutX="233.0" layoutY="187.0" mnemonicParsing="false" onAction="#updateOuvrage" prefHeight="33.0" prefWidth="90.0" style="-fx-background-radius: 5; -fx-background-color: #1f8de1; -fx-border-radius: 5;" text="UPDATE" textFill="WHITE">
@@ -114,7 +112,6 @@
                   <Label layoutX="31.0" layoutY="109.0" text="Publisher" textFill="#dddddd" />
                   <Label layoutX="30.0" layoutY="168.0" text="Year" textFill="#dddddd" />
                   <Label layoutX="32.0" layoutY="226.0" text="Stock quantity" textFill="#dddddd" />
-                  <Label layoutX="129.0" layoutY="225.0" text="Sold out times" textFill="#dddddd" />
                   <Label layoutX="233.0" layoutY="48.0" text="Author" textFill="#dddddd" />
                   <Label layoutX="232.0" layoutY="108.0" text="Field" textFill="#dddddd" />
                   <Button defaultButton="true" layoutX="329.0" layoutY="187.0" mnemonicParsing="false" onAction="#deleteBook" prefHeight="33.0" prefWidth="90.0" style="-fx-background-radius: 5; -fx-background-color: #fa2d2d; -fx-border-radius: 5;" text="DELETE" textFill="WHITE">

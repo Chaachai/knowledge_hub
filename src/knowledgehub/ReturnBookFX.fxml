@@ -63,9 +63,9 @@
             </Label>
             <TableView fx:id="pretsTable" layoutX="28.0" layoutY="110.0" onMouseClicked="#mouseClickedTable" prefHeight="237.0" prefWidth="774.0" stylesheets="@../css/table_view_style.css">
                <columns>
-                  <TableColumn fx:id="pret_etudiant" prefWidth="233.0" text="STUDENT NAME" />
-                  <TableColumn fx:id="pret_ouvrage" prefWidth="327.0" text="BOOK TITLE" />
-                  <TableColumn fx:id="pret_date" prefWidth="212.0" text="BORROW DATE" />
+                  <TableColumn fx:id="pret_etudiant" prefWidth="198.0" text="STUDENT NAME" />
+                  <TableColumn fx:id="pret_ouvrage" prefWidth="362.0" text="BOOK TITLE" />
+                  <TableColumn fx:id="pret_date" prefWidth="210.0" text="BORROW DATE" />
                </columns>
             </TableView>
             <Pane layoutX="28.0" layoutY="361.0" prefHeight="269.0" prefWidth="245.0" style="-fx-border-color: #b178ff; -fx-border-radius: 5; -fx-background-radius: 5;">
